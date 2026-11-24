@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vos grabá, yo edito</title>
+<title>Edición automática para creadores · Lukychill</title>
 <meta name="description" content="Sistemas de edición automática hechos a medida para creadores de contenido. Vos grabás tus ideas, la edición sale sola.">
 <meta name="theme-color" content="#0d0d10">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="Vos grabá, yo edito · Lukychill">
+<meta property="og:title" content="Vos grabá tus ideas, la edición sale sola · Lukychill">
 <meta property="og:description" content="Sistemas de edición e ideas automáticas hechos a medida para creadores de contenido.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://creadores.lukychill.com/og-image.jpg">
@@ -416,8 +416,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .real .phone.after{position:relative;right:auto;top:auto;width:min(270px,72vw);transform:none}
   .real .arrow{display:none}
   .real figcaption{position:static;width:100%;text-align:center;margin-top:-30px}
-  .compare{overflow-x:auto}
-  .crow{min-width:620px}
+
   .plan .for{min-height:0}
 }
 @media (max-width:420px){
@@ -426,9 +425,52 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .hook{font-size:1rem}.caps{font-size:.85rem}
   .calc-in,.calc-out{padding:26px}
 }
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+html{scroll-padding-top:84px}
+.btn .from{font-weight:500;opacity:.7;font-size:.86em;margin-left:2px}
+.dxnote{font-size:.85rem;color:var(--muted);margin-top:-6px;margin-bottom:22px}
+.midcta{margin-top:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 30px;border-radius:22px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line))}
+.midcta b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.25rem;margin-bottom:4px}
+.midcta span{color:var(--muted)}
+.midcta-b{display:flex;flex-direction:column;align-items:center;gap:8px;flex:none}
+.lnk{color:var(--muted);font-size:.88rem}
+.lnk:hover{color:var(--ink)}
+.about{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;max-width:920px}
+.about-av{width:150px;height:150px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 20px 50px var(--glow)}
+.about-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--bg)}
+.about-av i{font-style:normal;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:4.4rem;color:#14100c}
+.about p{color:var(--muted);font-size:1.05rem;margin-top:14px}
+.btn-dark{margin-top:22px;background:#14100c;color:#fff;border:0}
+.btn-dark:hover{transform:translateY(-1px)}
+.after{margin-top:28px;padding:28px 30px;border:1px solid var(--line);border-radius:22px;background:var(--surface)}
+.after h3{font-size:1.1rem;margin-bottom:18px}
+.after ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:none;padding:0;margin:0}
+.after li{display:flex;gap:12px;align-items:flex-start}
+.after li>b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-size:.9rem}
+.after strong{display:block;font-size:.95rem}
+.after li span{display:block;color:var(--muted);font-size:.86rem;margin-top:2px}
+.flinks{display:flex;gap:18px}
+.flinks a{color:var(--muted);text-decoration:none}
+.flinks a:hover{color:var(--ink)}
+@media (max-width:900px){.after ol{grid-template-columns:1fr 1fr}.midcta{flex-direction:column;align-items:flex-start}.midcta-b{align-items:flex-start;width:100%}.midcta-b .btn{width:100%;justify-content:center}}
+@media (max-width:640px){.about{grid-template-columns:1fr;gap:22px}.about-av{width:96px;height:96px}.after{padding:22px}.after ol{grid-template-columns:1fr}.midcta{padding:22px}.flinks{flex-wrap:wrap;gap:12px}body:has(#mcta:not([hidden])) footer{padding-bottom:96px}}
+@media (max-width:900px){
+  .crow.head{display:none}
+  .crow{grid-template-columns:1fr}
+  .crow>div{padding:6px 18px}
+  .crow>div:first-child{padding-top:16px;font-weight:700;font-family:"Bricolage Grotesque",sans-serif;font-size:1.02rem}
+  .crow>div:last-child{padding-bottom:16px}
+  .crow>div[data-l]{display:flex;justify-content:space-between;gap:14px;font-size:.9rem;text-align:right}
+  .crow>div[data-l]::before{content:attr(data-l);color:var(--muted);font-weight:500;text-align:left}
+  .crow>div:nth-child(4){background:none}
+  .crow>div:nth-child(4)::before{color:var(--accent);font-weight:700}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#planes">Saltar a planes y precios</a>
 
 <nav>
   <div class="wrap">
@@ -438,6 +480,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <a href="#ideas">Ideas</a>
       <a href="#que">Qué incluye</a>
       <a href="#planes">Planes</a>
+      <a href="#faq">Preguntas</a>
       <a class="btn btn-main navdx" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Diagnóstico gratis</a>
       <button class="cartbtn" id="cartbtn" type="button" aria-label="Ver tu pedido"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span class="n" id="cart-n" hidden>0</span></button>
     </div>
@@ -449,14 +492,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <div>
       <span class="eyebrow">Edición e ideas automáticas para creadores</span>
       <h1>Vos grabá tus ideas.<br><span class="hl">La edición sale sola.</span></h1>
-      <p class="lead">Te armo un sistema hecho a tu medida que edita tus videos con tu estilo y te dice qué grabar después, según lo que mejor le funcionó a tu canal. Vos solo te ocupás de grabar.</p>
+      <p class="lead">Te armo un sistema a tu medida que edita tus videos con tu estilo y te dice qué grabar después, según lo que mejor le funcionó a tu canal. Vos solo te ocupás de grabar.</p>
+      <p class="dxnote">El diagnóstico es gratis, toma 2 minutos y no te compromete a nada.</p>
       <div class="cta-row">
         <a class="btn btn-main" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Hacer mi diagnóstico gratis
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#como">Ver cómo funciona</a>
+        <a class="btn btn-ghost" href="#planes">Ver planes <span class="from">desde USD 150</span></a>
       </div>
       <div class="trust">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Armado con pago único</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Pago único, el sistema queda tuyo</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Ideas basadas en tus números</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>No necesitás saber editar</span>
       </div>
@@ -582,6 +626,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         </div>
       </div>
     </div>
+    <div class="midcta reveal"><div><b>El análisis de ideas viene incluido en el Plan Pro.</b><span>Edición automática más un banco de ideas basado en tus propios números.</span></div><div class="midcta-b"><a class="btn btn-main" href="#planes">Ver planes y precios</a><a class="lnk" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">o hacé el diagnóstico gratis</a></div></div>
   </div>
 </section>
 
@@ -627,6 +672,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   </div>
 </section>
 
+<section id="quien">
+  <div class="wrap about reveal">
+    <div class="about-av"><img src="media/lukychill.jpg" alt="Lukychill, creador de contenido" width="150" height="150"></div>
+    <div>
+      <span class="eyebrow">Quién lo arma</span>
+      <h2>Lo armé primero para mi propio canal.</h2>
+      <p>Soy Lukychill y hago contenido de Rocket League. Me cansé de pasar más tiempo editando que grabando, así que construí mi propio sistema: edita mis tutoriales con mi estilo y me dice qué grabar según lo que mejor me funcionó. Lo que viste arriba no es una demo armada para vender: son mis videos y mis números reales.</p>
+      <p>Ahora armo lo mismo, a medida, para otros creadores. Trabajo con vos uno a uno, así que el sistema sale con tu estilo y no con una plantilla.</p>
+    </div>
+  </div>
+</section>
+
 <section style="background:var(--bg2)">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -635,11 +692,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     </div>
     <div class="compare reveal">
       <div class="crow head"><div></div><div>Editor freelance</div><div>Apps con plantillas</div><div>Tu sistema a medida</div></div>
-      <div class="crow"><div>Edita con tu estilo exacto</div><div class="no">Depende de la persona</div><div class="no">Estilo genérico</div><div class="yes">Sí, siempre igual</div></div>
-      <div class="crow"><div>Cómo pagás</div><div class="no">Cada video</div><div class="no">Suscripción mensual</div><div class="yes">Pago único + soporte opcional</div></div>
-      <div class="crow"><div>Tiempo de entrega</div><div class="no">Días</div><div class="no">Lo armás vos</div><div class="yes">Minutos</div></div>
-      <div class="crow"><div>Se adapta a tus formatos</div><div class="yes">Sí</div><div class="no">Poco</div><div class="yes">Sí, uno por formato</div></div>
-      <div class="crow"><div>Tenés que saber editar</div><div class="yes">No</div><div class="no">Sí</div><div class="yes">No</div></div>
+      <div class="crow"><div>Edita con tu estilo exacto</div><div class="no" data-l="Editor freelance">Depende de la persona</div><div class="no" data-l="Apps con plantillas">Estilo genérico</div><div class="yes" data-l="Tu sistema a medida">Sí, siempre igual</div></div>
+      <div class="crow"><div>Cómo pagás</div><div class="no" data-l="Editor freelance">Cada video</div><div class="no" data-l="Apps con plantillas">Suscripción mensual</div><div class="yes" data-l="Tu sistema a medida">Pago único + soporte opcional</div></div>
+      <div class="crow"><div>Tiempo de entrega</div><div class="no" data-l="Editor freelance">Días</div><div class="no" data-l="Apps con plantillas">Lo armás vos</div><div class="yes" data-l="Tu sistema a medida">Minutos</div></div>
+      <div class="crow"><div>Se adapta a tus formatos</div><div class="yes" data-l="Editor freelance">Sí</div><div class="no" data-l="Apps con plantillas">Poco</div><div class="yes" data-l="Tu sistema a medida">Sí, uno por formato</div></div>
+      <div class="crow"><div>Tenés que saber editar</div><div class="yes" data-l="Editor freelance">No</div><div class="no" data-l="Apps con plantillas">Sí</div><div class="yes" data-l="Tu sistema a medida">No</div></div>
     </div>
   </div>
 </section>
@@ -667,6 +724,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
         <div class="big"><span id="res">4,2</span> h</div>
         <p>por semana, unas <b id="mes">18</b> horas al mes para grabar más ideas.</p>
         <small>Estimación con un ahorro del 70 % del tiempo de edición. El número exacto lo vemos en tu diagnóstico.</small>
+        <a class="btn btn-dark" href="#planes">Recuperar esas horas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </div>
@@ -714,7 +772,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Carruseles a partir de tus videos</li>
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Seguimiento personal: revisamos juntos tus primeros videos y ajustamos hasta que quede como querés</li>
             </ul>
-            <button class="btn btn-ghost pick" type="button" data-pick="pro" role="radio" aria-checked="false">Elegir Pro</button>
+            <button class="btn btn-main pick" type="button" data-pick="pro" role="radio" aria-checked="false">Elegir Pro</button>
           </article>
         </div>
 
@@ -742,6 +800,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span><b>¿Dudas antes de comprar?</b><a href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Hacé el diagnóstico gratis</a> y te digo qué plan te conviene.</span></div>
     </div>
 
+
+    <div class="after reveal">
+      <h3>Qué pasa después de pagar</h3>
+      <ol>
+        <li><b>1</b><div><strong>Te escribo</strong><span>Coordinamos el arranque por mensaje.</span></div></li>
+        <li><b>2</b><div><strong>Conozco tu canal</strong><span>Me mostrás tus videos, tu estilo y lo que querés automatizar.</span></div></li>
+        <li><b>3</b><div><strong>Armo tu sistema</strong><span>Lo configuro con tu marca y lo instalo en tu compu.</span></div></li>
+        <li><b>4</b><div><strong>Lo probás</strong><span>Editamos tus primeros videos y ajustamos hasta que quede como querés.</span></div></li>
+      </ol>
+    </div>
     <div class="req reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
       <span><b style="color:var(--ink)">Qué necesitás:</b> una compu con Windows o Mac y tu propia suscripción a Claude, la inteligencia artificial que corre tu sistema (desde USD 20 por mes, la pagás directo a Anthropic). Todo lo demás lo instalo yo y está incluido en el precio.</span>
@@ -750,16 +818,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 </section>
 
 <section>
-  <div class="wrap faq">
+  <div class="wrap faq" id="faq">
     <div class="sec-head reveal">
       <span class="eyebrow">Preguntas frecuentes</span>
       <h2>Antes de arrancar</h2>
     </div>
-    <details><summary>¿Tengo que saber editar?</summary><p>No. El sistema edita por vos. Vos revisás el resultado y, si querés un cambio, lo pedís con tus palabras.</p></details>
+    <details open><summary>¿Tengo que saber editar?</summary><p>No. El sistema edita por vos. Vos revisás el resultado y, si querés un cambio, lo pedís con tus palabras.</p></details>
     <details><summary>¿Sirve para mi tipo de contenido?</summary><p>Funciona muy bien con videos hablados, tutoriales, reseñas, gaming, negocios y tiendas. En el diagnóstico gratis vemos si encaja con lo tuyo antes de que pagues nada.</p></details>
     <details><summary>¿Cuánto tarda en estar listo?</summary><p>El Starter suele estar en una semana. El Pro, entre dos y tres semanas, porque incluye varios formatos y las revisiones juntos.</p></details>
     <details><summary>¿Qué pasa si después quiero cambiar algo?</summary><p>Con el soporte mensual lo ajustamos cuando quieras. Sin mantenimiento, cada cambio se cotiza aparte.</p></details>
     <details><summary>¿Cómo se cobra el soporte mensual?</summary><p>Es opcional y lo sumás a tu plan desde el carrito. El primer mes se paga junto con el armado y después se cobra automáticamente cada mes. Lo cancelás cuando quieras y tu sistema sigue funcionando igual.</p></details>
+    <details><summary>¿Cómo pago?</summary><p>Desde el carrito de esta página. En pesos con Mercado Pago (tarjeta, débito o dinero en cuenta, al dólar tarjeta del día) o en dólares con PayPal. Tus datos de tarjeta los maneja la plataforma de pago, nunca pasan por mí.</p></details>
+    <details><summary>¿Tengo que pagar algo más?</summary><p>Solo tu propia suscripción a Claude, la inteligencia artificial que corre el sistema (desde USD 20 por mes, se la pagás directo a Anthropic). El armado y la instalación ya están incluidos en el precio del plan.</p></details>
+    <details><summary>¿Starter o Pro?</summary><p>Starter si subís un solo tipo de video y querés dejar de editarlo a mano. Pro si tenés varios formatos o querés que el sistema también te diga qué grabar según tus números. Si dudás, el diagnóstico gratis te lo dice.</p></details>
     <details><summary>¿El sistema es mío?</summary><p>Sí. Queda instalado en tu compu y lo usás todas las veces que quieras, sin pagar por video.</p></details>
     <details><summary>¿Cómo es el diagnóstico gratis?</summary><p>Contestás unas preguntas cortas sobre tu canal (toma dos minutos) y te mando qué podés automatizar, cuántas horas te ahorrás y qué plan te conviene. Sin compromiso.</p></details>
   </div>
@@ -770,9 +841,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <div class="final-box reveal">
       <span class="eyebrow">Tu próximo paso</span>
       <h2>Dejá de editar.<br><span class="hl">Volvé a crear.</span></h2>
-      <p>Hacé el diagnóstico gratis y en dos minutos sabés cuánto tiempo te podés ahorrar.</p>
-      <a class="btn btn-main" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Hacer mi diagnóstico gratis
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p>Elegí tu plan ahora, o hacé el diagnóstico gratis y en dos minutos sabés cuánto tiempo te podés ahorrar.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-main" href="#planes">Elegir mi plan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Diagnóstico gratis</a>
+      </div>
     </div>
   </div>
 </section>
@@ -780,10 +853,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <footer>
   <div class="wrap">
     <span>© 2026 Lukychill · Automatizaciones para creadores</span>
-    <span>Hecho para que vuelvas a grabar.</span>
+    <span class="flinks"><a href="#planes">Planes</a><a href="#faq">Preguntas</a><a href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Diagnóstico gratis</a></span>
   </div>
 </footer>
 
+<div class="mbar mcta" id="mcta" hidden>
+  <div class="mbar-txt"><span>Planes desde</span><b>USD 150</b></div>
+  <a class="btn btn-main" href="#planes">Ver planes</a>
+</div>
 <div class="mbar" id="mbar" hidden>
   <div class="mbar-txt"><span id="mbar-name"></span><b id="mbar-total"></b></div>
   <button class="btn btn-main" type="button" data-open-cart>Ver pedido</button>
@@ -913,6 +990,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   $('#addon').addEventListener('click',function(){if(!cart.plan){toast('Primero elegí Starter o Pro');var pl=$('.shop .plans');pl&&pl.scrollIntoView({behavior:'smooth',block:'center'})}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();$('#modal').hidden=true;document.body.style.overflow=''}});
   render();
+  /* Barra fija en celular cuando todavía no hay plan elegido */
+  var mcta=$('#mcta'),heroEl=$('.hero'),planesEl=$('#planes'),planesIn=false;
+  function updMcta(){var past=heroEl?window.scrollY>heroEl.offsetHeight-80:true;mcta.hidden=!!cart.plan||!past||planesIn}
+  if('IntersectionObserver' in window&&planesEl){new IntersectionObserver(function(es){planesIn=es[0].isIntersecting;updMcta()},{threshold:0}).observe(planesEl)}
+  window.addEventListener('scroll',updMcta,{passive:true});document.addEventListener('click',function(){setTimeout(updMcta,0)});updMcta();
   var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
