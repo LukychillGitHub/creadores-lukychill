@@ -293,6 +293,38 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .cv-row.big strong{font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--ink)}
 .cv-row.sub{color:var(--muted);font-size:.88rem}
 .cv-go{width:100%;margin-top:14px}
+.pm{display:flex;flex-direction:column;gap:8px}
+.pm-opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.pm-opt:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.pm-opt.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.rad{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);margin-top:3px;position:relative}
+.pm-opt.on .rad{border-color:var(--accent)}
+.pm-opt.on .rad::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
+.pm-b{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.pm-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pm-b small{color:var(--muted);font-size:.78rem}
+.pm-cur{font-size:.68rem;font-weight:800;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.logo-pp{font-family:Verdana,Arial,sans-serif;font-style:italic;font-weight:800;font-size:1.12rem;letter-spacing:-.03em;background:#fff;border-radius:6px;padding:1px 8px}
+.logo-pp b:first-child{color:#003087}.logo-pp b:last-child{color:#009cde}
+.logo-mp{display:inline-flex;align-items:center;gap:5px;background:#fff;color:#2d3277;border-radius:6px;padding:2px 8px 2px 4px;font-family:Arial,sans-serif;font-weight:700;font-size:.86rem;letter-spacing:-.02em}
+.logo-mp b{font-weight:800}
+.logo-mp i{width:20px;height:14px;border-radius:50%;background:#00b1ea;position:relative}
+.logo-mp i::after{content:"";position:absolute;left:5px;top:5px;width:10px;height:4px;border:2px solid #fff;border-top:0;border-radius:0 0 6px 6px}
+.ccs{display:flex;gap:5px;margin-top:2px}
+.cc{display:inline-grid;place-items:center;height:20px;min-width:32px;padding:0 5px;border-radius:4px;background:#fff;font-style:normal;font-weight:800;font-size:.58rem;font-family:Arial,sans-serif;box-shadow:0 0 0 1px #0002}
+.cc.visa{color:#1a1f71;font-style:italic;font-size:.66rem}
+.cc.mc{display:inline-flex;gap:0;align-items:center;justify-content:center}
+.cc.mc b{width:12px;height:12px;border-radius:50%;background:#eb001b;display:block}
+.cc.mc b+b{background:#f79e1b;margin-left:-5px;mix-blend-mode:multiply}
+.cc.amex{background:#2e77bc;color:#fff}
+.cc.mae{color:#2d3277;font-size:.6rem}
+.paygo{width:100%;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:999px;padding:15px 18px;font:inherit;font-weight:800;font-size:1rem;cursor:pointer;transition:transform .15s,filter .15s}
+.paygo:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.paygo svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.paygo.pp{background:#ffc439;color:#111}
+.paygo.mp{background:#009ee3;color:#fff}
+.secure{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:.78rem;color:var(--muted)}
+.secure svg{flex:none;width:16px;height:16px;fill:none;stroke:var(--good);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
 .paywith{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:16px 0 8px}
 .paybtn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border-radius:14px;padding:13px 16px;margin-bottom:8px;cursor:pointer;border:1.5px solid transparent;font:inherit;transition:transform .15s}
 .paybtn:hover{transform:translateY(-2px)}
@@ -778,8 +810,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   };
   var PLANS = {starter:{name:'Starter',price:150,desc:'1 tipo de video automatizado'},pro:{name:'Pro',price:500,desc:'Varios formatos + ideas con datos + seguimiento'}};
   var SUP = {name:'Mantenimiento y soporte',price:80};
-  var KEY='lk-cart-v1', cart={plan:null,sup:false};
-  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&(saved.plan in PLANS||saved.plan===null)){cart.plan=saved.plan;cart.sup=!!saved.sup&&!!saved.plan;}}catch(e){}
+  var KEY='lk-cart-v1', cart={plan:null,sup:false,cur:'usd'};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&(saved.plan in PLANS||saved.plan===null)){cart.plan=saved.plan;cart.sup=!!saved.sup&&!!saved.plan;if(saved.cur==='ars'||saved.cur==='usd')cart.cur=saved.cur;}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}}
   var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
   function usd(n){return 'USD '+n}
@@ -801,10 +833,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     h+='</div>';
     if(!cart.sup) h+='<div class="cv-up"><span>¿Sumás soporte mensual por '+usd(SUP.price)+'/mes?</span><button type="button" data-addsup>Sumar</button></div>';
     if(cart.plan==='starter') h+='<div class="cv-up"><span>Con Pro sumás varios formatos e ideas con datos.</span><button type="button" data-topro>Pasar a Pro</button></div>';
-    h+='<div class="paywith">Elegí cómo pagar</div>';
-    h+='<button class="paybtn mp" type="button" data-checkout="ars"><span class="pb-l"><b>Pesos argentinos</b><small>Mercado Pago · tarjeta, débito o dinero en cuenta</small></span><span class="pb-a">→</span></button>';
-    h+='<button class="paybtn pp" type="button" data-checkout="usd"><span class="pb-l"><b>Dólares</b><small>PayPal · tarjeta internacional o saldo PayPal</small></span><span class="pb-a">→</span></button>';
-    h+='<div class="cv-note">'+ICK+'<span>En pesos se cobra el equivalente al tipo de cambio del día. Tus datos los procesa Mercado Pago o PayPal, nunca pasan por mí.</span></div>';
+    var cur=cart.cur||'usd';
+    var VISA='<i class="cc visa">VISA</i>',MC='<i class="cc mc"><b></b><b></b></i>',AMEX='<i class="cc amex">AMEX</i>',MAE='<i class="cc mae">Débito</i>';
+    h+='<div class="paywith">Método de pago</div><div class="pm" role="radiogroup" aria-label="Método de pago">';
+    h+='<button type="button" class="pm-opt'+(cur==='usd'?' on':'')+'" role="radio" aria-checked="'+(cur==='usd')+'" data-cur="usd"><span class="rad"></span><span class="pm-b"><span class="pm-top"><span class="logo-pp"><b>Pay</b><b>Pal</b></span><span class="pm-cur">USD</span></span><small>Saldo PayPal o tarjeta internacional</small><span class="ccs">'+VISA+MC+AMEX+'</span></span></button>';
+    h+='<button type="button" class="pm-opt'+(cur==='ars'?' on':'')+'" role="radio" aria-checked="'+(cur==='ars')+'" data-cur="ars"><span class="rad"></span><span class="pm-b"><span class="pm-top"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="pm-cur">ARS</span></span><small>Tarjeta, débito o dinero en cuenta, en pesos</small><span class="ccs">'+VISA+MC+MAE+'</span></span></button>';
+    h+='</div>';
+    h+='<button class="paygo '+(cur==='usd'?'pp':'mp')+'" type="button" data-checkout="'+cur+'"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>'+(cur==='usd'?'Pagar '+usd(p.price+(cart.sup?SUP.price:0))+' con PayPal':'Pagar en pesos con Mercado Pago')+'</button>';
+    h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesa '+(cur==='usd'?'PayPal':'Mercado Pago')+': tus datos de tarjeta nunca pasan por mí.</span></div>';
+    if(cur==='ars') h+='<div class="cv-note">'+ICK+'<span>En pesos se cobra el equivalente al tipo de cambio del día.</span></div>';
     h+='<div class="cv-note">'+ICK+'<span>Después de pagar te escribo para coordinar el arranque.</span></div>';
     return h;
   }
@@ -829,8 +866,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     $('#modal-sum').innerHTML=s;closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
   }
   document.addEventListener('click',function(e){
-    var t=e.target.closest('[data-pick],[data-rm],[data-addsup],[data-topro],[data-checkout],[data-open-cart],[data-close-cart],[data-close-modal],#drawer-bg,#cartbtn');
+    var t=e.target.closest('[data-cur],[data-pick],[data-rm],[data-addsup],[data-topro],[data-checkout],[data-open-cart],[data-close-cart],[data-close-modal],#drawer-bg,#cartbtn');
     if(!t){if(e.target.id==='modal'){$('#modal').hidden=true;document.body.style.overflow=''}return}
+    if(t.dataset.cur&&!t.hasAttribute('data-checkout')){cart.cur=t.dataset.cur;render();return}
     if(t.dataset.pick){if(cart.plan===t.dataset.pick){openCart();return}setPlan(t.dataset.pick)}
     else if(t.dataset.rm==='plan'){cart.plan=null;cart.sup=false;render();toast('Quitaste el plan del pedido')}
     else if(t.dataset.rm==='sup'){cart.sup=false;render();toast('Quitaste el soporte mensual')}
