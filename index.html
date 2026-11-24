@@ -120,6 +120,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .snd svg{width:18px;height:18px}
 .real figcaption{position:absolute;left:0;top:330px;width:50%;font-size:.88rem;color:var(--muted)}
 .real figcaption b{color:var(--ink)}
+.did{display:none}
 .phone.after .screen{background:#000}
 .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0}
 .marquee{display:flex;gap:44px;white-space:nowrap;animation:mq 30s linear infinite;width:max-content}
@@ -410,12 +411,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .navlinks{gap:10px}
   section{padding:68px 0}
   .hero{padding-top:44px}
-  .real{min-height:0;padding-top:44px;display:flex;flex-direction:column;align-items:center;gap:56px}
-  .rawcard{width:100%;transform:none}
-  .rawcard .label{left:50%}
-  .real .phone.after{position:relative;right:auto;top:auto;width:min(270px,72vw);transform:none}
-  .real .arrow{display:none}
-  .real figcaption{position:static;width:100%;text-align:center;margin-top:-30px}
+  .real{min-height:0;padding:8px 0 0;max-width:460px;margin:0 auto;width:100%}
+  .real::before{content:"";position:absolute;right:-10%;top:30%;width:80%;aspect-ratio:1;background:radial-gradient(circle,var(--glow),transparent 65%);pointer-events:none}
+  .rawcard{position:absolute;left:0;top:8px;width:80%;margin:0;transform:rotate(-3deg);z-index:1;border-width:5px}
+  .rawcard .label,.real .phone .label{top:10px;left:10px;transform:none;z-index:5;font-size:.66rem;padding:4px 10px}
+  .real .phone .label{left:auto;right:12px;top:14px}
+  .rawmeta{font-size:.6rem}
+  .real .phone.after{position:relative;right:auto;top:auto;width:min(230px,54vw);margin:clamp(120px,36vw,170px) 0 0 auto;transform:rotate(3deg);border-width:6px;border-radius:30px}
+  .real .phone.after .screen{border-radius:24px}
+  .real .arrow{display:flex;gap:6px;align-items:center;width:auto;height:auto;padding:8px 14px 8px 12px;border-radius:999px;left:4%;top:auto;bottom:34%;transform:rotate(-3deg);font-size:.78rem;font-weight:700;white-space:nowrap;animation:nudge 2.4s ease-in-out infinite}
+  .real .arrow::after{content:"Edición automática"}
+  .real .arrow svg{width:16px;height:16px}
+  .real figcaption{position:static;width:100%;text-align:left;margin-top:22px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+  .did{display:flex;flex-direction:column;gap:8px;position:absolute;left:2%;bottom:calc(34% + 58px);list-style:none;margin:0;padding:0;z-index:3}
+  .did li{display:flex;align-items:center;gap:7px;font-size:.76rem;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:6px 11px 6px 8px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.25);animation:pop .5s both}
+  .did li::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--good) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/9px no-repeat}
+  .did li:nth-child(2){animation-delay:.15s}.did li:nth-child(3){animation-delay:.3s}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes nudge{0%,100%{transform:rotate(-3deg) translateX(0)}50%{transform:rotate(-3deg) translateX(6px)}}
 
   .plan .for{min-height:0}
 }
@@ -438,7 +451,7 @@ html{scroll-padding-top:84px}
 .lnk{color:var(--muted);font-size:.88rem}
 .lnk:hover{color:var(--ink)}
 .about{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;max-width:920px}
-.about-av{width:150px;height:150px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 20px 50px var(--glow)}
+.about-av{width:172px;height:172px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 20px 50px var(--glow)}
 .about-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--bg)}
 .about-av i{font-style:normal;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:4.4rem;color:#14100c}
 .about p{color:var(--muted);font-size:1.05rem;margin-top:14px}
@@ -467,6 +480,24 @@ html{scroll-padding-top:84px}
   .crow>div:nth-child(4){background:none}
   .crow>div:nth-child(4)::before{color:var(--accent);font-weight:700}
 }
+body:not(.checkout) .co-only{display:none!important}
+body:not(.checkout) .shop{grid-template-columns:1fr}
+body:not(.checkout) .shop .plans{margin-bottom:0}
+.co-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.co-nav-r{display:flex;align-items:center;gap:18px}
+.co-secure{display:flex;align-items:center;gap:6px;color:var(--good);font-size:.85rem;font-weight:600}
+.co-secure svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.co-back{color:var(--muted);text-decoration:none;font-weight:600;font-size:.92rem;border:1px solid var(--line);padding:8px 14px;border-radius:999px}
+.co-back:hover{color:var(--ink)}
+body.checkout #planes{padding-top:40px;background:var(--bg)!important}
+body.checkout .sec-head{margin-bottom:26px}
+.co-steps{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 30px;padding:0;list-style:none}
+.co-steps li{display:flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:999px;border:1px solid var(--line);font-size:.86rem;font-weight:600;color:var(--muted);background:var(--surface)}
+.co-steps li b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;background:var(--surface2);color:var(--muted)}
+.co-steps li.on{color:var(--ink);border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.co-steps li.on b{background:var(--accent);color:var(--accent-ink)}
+.co-steps li.ok b{background:var(--good);color:#fff}
+@media (max-width:560px){.co-secure span{display:none}.co-nav-r{gap:10px}}
 </style>
 </head>
 <body>
@@ -521,6 +552,7 @@ html{scroll-padding-top:84px}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path id="sndx" d="M22 9l-6 6M16 9l6 6"/></svg>
         </button>
       </div>
+      <ul class="did" aria-hidden="true"><li>Subtítulos</li><li>Panel de 3 pasos</li><li>Vertical 9:16</li></ul>
       <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <figcaption><b>Caso real de mi canal.</b> El mismo momento del video, antes y después: el sistema armó solo el panel con los 3 pasos, los subtítulos y el encuadre vertical.</figcaption>
     </figure>
@@ -734,13 +766,13 @@ html{scroll-padding-top:84px}
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Planes</span>
-      <h2>Armá tu pedido.</h2>
-      <p>Elegí tu plan: se paga una sola vez y el sistema queda tuyo. Si querés que te acompañe después, sumale el soporte mensual. Lo cancelás cuando quieras.</p>
+      <h2 data-co-h>Elegí tu plan.</h2>
+      <p data-co-p>Se paga una sola vez y el sistema queda tuyo. En el paso siguiente podés sumar el soporte mensual y elegir cómo pagar, en pesos o en dólares.</p>
     </div>
 
     <div class="shop">
       <div class="shop-main">
-        <div class="step-t"><b>1</b>Elegí tu plan</div>
+        <div class="step-t co-only"><b>1</b>Elegí tu plan</div>
         <div class="plans" role="radiogroup" aria-label="Plan">
           <article class="plan" data-plan="starter">
             <h3>Starter</h3>
@@ -776,6 +808,7 @@ html{scroll-padding-top:84px}
           </article>
         </div>
 
+        <div class="co-only">
         <div class="step-t"><b>2</b>Sumá soporte mensual <span class="opt">Opcional</span></div>
         <label class="addon" id="addon">
           <input type="checkbox" id="addon-cb" disabled>
@@ -786,9 +819,10 @@ html{scroll-padding-top:84px}
             <span class="addon-hint" id="addon-hint">Primero elegí Starter o Pro: el soporte se suma a un plan.</span>
           </span>
         </label>
+        </div>
       </div>
 
-      <aside class="summary" id="summary" aria-live="polite">
+      <aside class="summary co-only" id="summary" aria-live="polite">
         <div class="sum-card" data-cart-view></div>
       </aside>
     </div>
@@ -871,7 +905,7 @@ html{scroll-padding-top:84px}
   <div class="drawer-body" data-cart-view></div>
 </aside>
 <div class="modal-bg" id="modal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-t">
+  <div class="modal" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-t">
     <button type="button" class="x" data-close-modal aria-label="Cerrar">×</button>
     <div class="modal-ic"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
     <h3 id="modal-t">¡Buena elección!</h3>
@@ -885,6 +919,7 @@ html{scroll-padding-top:84px}
 <script>
 (function(){
   var v=document.getElementById('v'),h=document.getElementById('h');
+  if(v&&h){
   function fmt(n){return n.toLocaleString('es-AR',{maximumFractionDigits:1})}
   function upd(){
     var vv=+v.value,hh=+h.value,s=vv*hh*0.7;
@@ -894,17 +929,23 @@ html{scroll-padding-top:84px}
     document.getElementById('mes').textContent=Math.round(s*4.3);
   }
   v.addEventListener('input',upd);h.addEventListener('input',upd);upd();
+  }
   var sb=document.getElementById('snd'),ev=document.getElementById('edv');
   if(sb&&ev){sb.addEventListener('click',function(){ev.muted=!ev.muted;if(!ev.muted){ev.currentTime=0;ev.play();}document.getElementById('sndx').style.display=ev.muted?'':'none';sb.setAttribute('aria-label',ev.muted?'Activar sonido':'Silenciar');});}
   /* ===== Carrito ===== */
-  // Pegá acá los links de pago. "ars" = Mercado Pago (pesos), "usd" = PayPal (dólares).
+  // ===== LINKS DE PAGO (ver guia-pagos.md) =====
+  // ars = Mercado Pago (pesos): un link de pago por plan + un link de suscripción para el soporte mensual.
+  //   Si el pedido tiene soporte, la página muestra los dos pagos en orden (armado y después la suscripción).
+  // usd = PayPal (dólares): links de pago únicos para los planes solos, y planes de suscripción
+  //   (con cargo de alta = precio del plan + USD 80/mes) para los combos con soporte.
   // Mientras un link esté vacío, ese botón abre el formulario para pedir el link de pago.
   var PAYMENT_LINKS = {
-    ars: {'starter':'', 'pro':'', 'starter+soporte':'', 'pro+soporte':''},
+    ars: {'starter':'', 'pro':'', 'soporte':''},
     usd: {'starter':'', 'pro':'', 'starter+soporte':'', 'pro+soporte':''}
   };
   var PLANS = {starter:{name:'Starter',price:150,desc:'1 tipo de video automatizado'},pro:{name:'Pro',price:500,desc:'Varios formatos + ideas con datos + seguimiento'}};
   var SUP = {name:'Mantenimiento y soporte',price:80};
+  var CO=document.body.classList.contains('checkout');
   var KEY='lk-cart-v1', cart={plan:null,sup:false,cur:'usd'};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&(saved.plan in PLANS||saved.plan===null)){cart.plan=saved.plan;cart.sup=!!saved.sup&&!!saved.plan;if(saved.cur==='ars'||saved.cur==='usd')cart.cur=saved.cur;}}catch(e){}
 
@@ -954,28 +995,39 @@ html{scroll-padding-top:84px}
   }
   function render(){
     $$('[data-cart-view]').forEach(function(el){el.innerHTML=view()});
-    $$('.plan[data-plan]').forEach(function(el){var on=el.getAttribute('data-plan')===cart.plan;el.classList.toggle('sel',on);var b=el.querySelector('.pick');b.setAttribute('aria-checked',on);b.textContent=on?'Elegido ✓':'Elegir '+PLANS[el.getAttribute('data-plan')].name;});
+    $$('.plan[data-plan]').forEach(function(el){var on=el.getAttribute('data-plan')===cart.plan;el.classList.toggle('sel',on);var b=el.querySelector('.pick');b.setAttribute('aria-checked',on);b.textContent=CO?(on?'Elegido ✓':'Elegir '+PLANS[el.getAttribute('data-plan')].name):(on?'Continuar con ':'Elegir ')+PLANS[el.getAttribute('data-plan')].name;});
+    if(CO)$$('.co-steps li').forEach(function(li,i){li.classList.toggle('ok',i===0&&!!cart.plan);li.classList.toggle('on',i===0?!cart.plan:!!cart.plan)});
     var ad=$('#addon'),cb=$('#addon-cb');cb.disabled=!cart.plan;cb.checked=cart.sup;ad.classList.toggle('dis',!cart.plan);ad.classList.toggle('on',cart.sup);
-    var n=(cart.plan?1:0)+(cart.sup?1:0),badge=$('#cart-n');badge.textContent=n;badge.hidden=!n;
+    var n=(cart.plan?1:0)+(cart.sup?1:0),badge=$('#cart-n');if(badge){badge.textContent=n;badge.hidden=!n}
     var mb=$('#mbar');mb.hidden=!cart.plan;document.body.classList.toggle('has-cart',!!cart.plan);
     if(cart.plan){$('#mbar-name').textContent=PLANS[cart.plan].name+(cart.sup?' + soporte':'');$('#mbar-total').textContent=usd(PLANS[cart.plan].price+(cart.sup?SUP.price:0))+(cart.sup?' hoy':'');}
     save();
   }
-  function bump(){var c=$('#cartbtn');c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump')}
+  function bump(){var c=$('#cartbtn');if(!c)return;c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump')}
   function setPlan(k){var prev=cart.plan;cart.plan=k;render();bump();toast(prev&&prev!==k?'Cambiaste a Plan '+PLANS[k].name:'Plan '+PLANS[k].name+' agregado al pedido')}
   function openCart(){$('#drawer').hidden=false;$('#drawer-bg').hidden=false;document.body.style.overflow='hidden';setTimeout(function(){var x=$('#drawer .x');x&&x.focus()},50)}
   function closeCart(){$('#drawer').hidden=true;$('#drawer-bg').hidden=true;document.body.style.overflow=''}
+  var MODAL_DEFAULT=null,MODAL_X='<button type="button" class="x" data-close-modal aria-label="Cerrar">×</button>';
   function checkout(cur){
-    var key=cart.plan+(cart.sup?'+soporte':''),url=(PAYMENT_LINKS[cur]||{})[key];
-    if(url){window.location.href=url;return}
-    var p=PLANS[cart.plan],s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>';
+    if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
+    var L=PAYMENT_LINKS[cur]||{},p=PLANS[cart.plan],s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>';
     if(cart.sup)s+='<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>';
-    $('#modal-sum').innerHTML=s;closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
+    var url=cur==='ars'?L[cart.plan]:L[cart.plan+(cart.sup?'+soporte':'')];
+    if(url&&!(cur==='ars'&&cart.sup)){window.location.href=url;return}
+    var m=$('#modal-box');
+    if(cur==='ars'&&cart.sup&&url&&L.soporte){
+      m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">Tu pago en 2 pasos</h3><p>Mercado Pago cobra el armado y el soporte mensual por separado. Hacé los dos pagos en este orden:</p><div class="modal-sum">'+s+'</div>'+
+        '<a class="btn btn-main" href="'+url+'" target="_blank" rel="noopener">1. Pagar el armado ('+usd(p.price)+')</a>'+
+        '<a class="btn btn-ghost" style="margin-top:10px" href="'+L.soporte+'" target="_blank" rel="noopener">2. Activar el soporte mensual ('+usd(SUP.price)+'/mes)</a>';
+    } else m.innerHTML=MODAL_DEFAULT;
+    $('#modal-sum')&&($('#modal-sum').innerHTML=s);closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
   }
   document.addEventListener('click',function(e){
     var t=e.target.closest('[data-cur],[data-pick],[data-rm],[data-addsup],[data-topro],[data-checkout],[data-open-cart],[data-close-cart],[data-close-modal],#drawer-bg,#cartbtn');
     if(!t){if(e.target.id==='modal'){$('#modal').hidden=true;document.body.style.overflow=''}return}
     if(t.dataset.cur&&!t.hasAttribute('data-checkout')){cart.cur=t.dataset.cur;render();return}
+    if(!CO&&(t.dataset.pick||t.id==='cartbtn'||t.hasAttribute('data-open-cart'))){if(t.dataset.pick){cart.plan=t.dataset.pick;save()}location.href='comprar.html'+(cart.plan?'?plan='+cart.plan:'');return}
+    if(CO&&t.hasAttribute('data-open-cart')){var sm=$('#summary');sm&&sm.scrollIntoView({behavior:'smooth',block:'start'});return}
     if(t.dataset.pick){if(cart.plan===t.dataset.pick){openCart();return}setPlan(t.dataset.pick)}
     else if(t.dataset.rm==='plan'){cart.plan=null;cart.sup=false;render();toast('Quitaste el plan del pedido')}
     else if(t.dataset.rm==='sup'){cart.sup=false;render();toast('Quitaste el soporte mensual')}
@@ -989,12 +1041,15 @@ html{scroll-padding-top:84px}
   $('#addon-cb').addEventListener('change',function(e){if(!cart.plan){e.target.checked=false;return}cart.sup=e.target.checked;render();if(cart.sup){bump();toast('Soporte mensual agregado')}});
   $('#addon').addEventListener('click',function(){if(!cart.plan){toast('Primero elegí Starter o Pro');var pl=$('.shop .plans');pl&&pl.scrollIntoView({behavior:'smooth',block:'center'})}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();$('#modal').hidden=true;document.body.style.overflow=''}});
+  if(CO){try{var qp=new URLSearchParams(location.search).get('plan');if(qp in PLANS)cart.plan=qp}catch(e){}}
   render();
   /* Barra fija en celular cuando todavía no hay plan elegido */
   var mcta=$('#mcta'),heroEl=$('.hero'),planesEl=$('#planes'),planesIn=false;
+  if(mcta){
   function updMcta(){var past=heroEl?window.scrollY>heroEl.offsetHeight-80:true;mcta.hidden=!!cart.plan||!past||planesIn}
   if('IntersectionObserver' in window&&planesEl){new IntersectionObserver(function(es){planesIn=es[0].isIntersecting;updMcta()},{threshold:0}).observe(planesEl)}
   window.addEventListener('scroll',updMcta,{passive:true});document.addEventListener('click',function(){setTimeout(updMcta,0)});updMcta();
+  }
   var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
