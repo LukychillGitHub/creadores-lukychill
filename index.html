@@ -293,7 +293,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .cv-row.big strong{font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--ink)}
 .cv-row.sub{color:var(--muted);font-size:.88rem}
 .cv-go{width:100%;margin-top:14px}
-.wbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;border:0;border-radius:10px;height:50px;margin-bottom:9px;cursor:pointer;font:inherit;transition:filter .15s,transform .15s}
+.ars{font-size:.84rem;color:var(--muted);margin-top:4px;font-weight:500}
+.ars-in{display:block;text-align:right;margin-top:2px;font-family:Inter,sans-serif;font-size:.78rem}
+.cv-row.ars-row{color:var(--muted);font-size:.9rem}
+.cv-row.ars-row span:last-child{color:var(--ink);font-weight:600}
+.wbtn{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;position:relative;border:0;border-radius:10px;min-height:56px;padding:7px 12px;margin-bottom:9px;cursor:pointer;font:inherit;transition:filter .15s,transform .15s}
 .wbtn:hover{filter:brightness(.96);transform:translateY(-1px)}
 .wbtn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .wbtn.pp{background:#ffc439}
@@ -302,7 +306,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .wbtn.mp .logo-mp{background:none;color:#fff;font-size:1.05rem;padding:0}
 .wbtn.mp .logo-mp i{background:#fff}
 .wbtn.mp .logo-mp i::after{border-color:#009ee3}
-.wcur{position:absolute;right:14px;font-size:.74rem;font-weight:700;opacity:.75}
+.wcur{font-size:.74rem;font-weight:700;opacity:.8}
 .wbtn.pp .wcur{color:#111}.wbtn.mp .wcur{color:#fff}
 .ccrow{display:flex;justify-content:center;gap:6px;margin:4px 0 2px}
 .pm{display:flex;flex-direction:column;gap:8px}
@@ -685,6 +689,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
             <p class="for">Para creadores con un formato principal que quieren dejar de editarlo a mano.</p>
             <div class="amount"><sup>USD</sup>150</div>
             <div class="per">Pago único por el armado</div>
+            <div class="ars" data-ars="150" hidden></div>
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>1 tipo de video automatizado</li>
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Tu marca cargada: fuentes, colores y logo</li>
@@ -700,6 +705,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
             <p class="for">Para canales con varios formatos que quieren un sistema completo y acompañamiento.</p>
             <div class="amount"><sup>USD</sup>500</div>
             <div class="per">Pago único por el armado</div>
+            <div class="ars" data-ars="500" hidden></div>
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Todo lo del Starter</li>
               <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Varios tipos de video, cada uno con sus reglas</li>
@@ -717,7 +723,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
           <input type="checkbox" id="addon-cb" disabled>
           <span class="sw" aria-hidden="true"></span>
           <span class="addon-txt">
-            <span class="addon-h"><b>Mantenimiento y soporte</b><span class="addon-p">USD 80 <small>/ mes</small></span></span>
+            <span class="addon-h"><b>Mantenimiento y soporte</b><span class="addon-p">USD 80 <small>/ mes</small><span class="ars ars-in" data-ars="80" data-suffix=" / mes" hidden></span></span></span>
             <span class="addon-d">Ajustes cuando cambia tu estilo, formatos y efectos nuevos, revisión mensual de tus números con nueva tanda de ideas, soporte directo y prioridad en tus pedidos.</span>
             <span class="addon-hint" id="addon-hint">Primero elegí Starter o Pro: el soporte se suma a un plan.</span>
           </span>
@@ -824,6 +830,20 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   var SUP = {name:'Mantenimiento y soporte',price:80};
   var KEY='lk-cart-v1', cart={plan:null,sup:false,cur:'usd'};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&(saved.plan in PLANS||saved.plan===null)){cart.plan=saved.plan;cart.sup=!!saved.sup&&!!saved.plan;if(saved.cur==='ars'||saved.cur==='usd')cart.cur=saved.cur;}}catch(e){}
+
+  /* ===== Cotización del dólar (precio aproximado en pesos) ===== */
+  // Tipo de dólar para mostrar: 'oficial', 'blue' o 'bolsa' (MEP). Fuente: dolarapi.com
+  var DOLAR_TIPO='oficial', DOLAR_NOMBRE={oficial:'oficial',blue:'blue',bolsa:'MEP'}, rate=null, rateDate=null;
+  function fmtArs(n){var v=Math.round(n*rate/100)*100;return '$ '+v.toLocaleString('es-AR')}
+  function applyRate(){
+    if(!rate)return;
+    $$('[data-ars]').forEach(function(el){el.textContent='≈ '+fmtArs(+el.dataset.ars)+' ARS'+(el.dataset.suffix||'');el.hidden=false});
+    render();
+  }
+  function rateLabel(){var d=rateDate?new Date(rateDate):null;return 'dólar '+DOLAR_NOMBRE[DOLAR_TIPO]+' venta $'+Math.round(rate).toLocaleString('es-AR')+(d&&!isNaN(d)?', '+d.toLocaleDateString('es-AR',{day:'numeric',month:'short'}):'')}
+  try{var rc=JSON.parse(localStorage.getItem('lk-rate-'+DOLAR_TIPO)||'null');if(rc&&Date.now()-rc.t<6*36e5){rate=rc.v;rateDate=rc.d}}catch(e){}
+  if(rate)setTimeout(applyRate,0);
+  if(window.fetch){fetch('https://dolarapi.com/v1/dolares/'+DOLAR_TIPO).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.venta>0){rate=j.venta;rateDate=j.fechaActualizacion||null;try{localStorage.setItem('lk-rate-'+DOLAR_TIPO,JSON.stringify({v:rate,d:rateDate,t:Date.now()}))}catch(e){}applyRate()}}).catch(function(){})}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}}
   var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
   function usd(n){return 'USD '+n}
@@ -840,7 +860,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     h+='<div class="cv-item"><div><b>Plan '+p.name+'</b><small>'+p.desc+'</small></div><div class="cv-right"><strong>'+usd(p.price)+'</strong><small>pago único</small><button class="rm" type="button" data-rm="plan">Quitar</button></div></div>';
     if(cart.sup) h+='<div class="cv-item"><div><b>'+SUP.name+'</b><small>Se cobra todos los meses · cancelás cuando quieras</small></div><div class="cv-right"><strong>'+usd(SUP.price)+'/mes</strong><button class="rm" type="button" data-rm="sup">Quitar</button></div></div>';
     h+='<div class="cv-tot"><div class="cv-row big"><span>Hoy pagás</span><strong>'+usd(p.price+(cart.sup?SUP.price:0))+'</strong></div>';
-    if(cart.sup) h+='<div class="cv-row sub"><span>'+usd(p.price)+' del armado + primer mes de soporte</span></div><div class="cv-row sub"><span>Después</span><span>'+usd(SUP.price)+' por mes</span></div>';
+    if(rate) h+='<div class="cv-row ars-row"><span>En pesos, aprox.</span><span>'+fmtArs(p.price+(cart.sup?SUP.price:0))+'</span></div>';
+    if(cart.sup) h+='<div class="cv-row sub"><span>'+usd(p.price)+' del armado + primer mes de soporte</span></div><div class="cv-row sub"><span>Después</span><span>'+usd(SUP.price)+' por mes'+(rate?' (≈ '+fmtArs(SUP.price)+')':'')+'</span></div>';
     else h+='<div class="cv-row sub"><span>Sin cargos mensuales</span></div>';
     h+='</div>';
     if(!cart.sup) h+='<div class="cv-up"><span>¿Sumás soporte mensual por '+usd(SUP.price)+'/mes?</span><button type="button" data-addsup>Sumar</button></div>';
@@ -848,9 +869,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     var tot=usd(p.price+(cart.sup?SUP.price:0));
     h+='<div class="paywith">Pagá con</div>';
     h+='<button class="wbtn pp" type="button" data-checkout="usd" aria-label="Pagar '+tot+' con PayPal"><span class="logo-pp"><b>Pay</b><b>Pal</b></span><span class="wcur">'+tot+'</span></button>';
-    h+='<button class="wbtn mp" type="button" data-checkout="ars" aria-label="Pagar en pesos con Mercado Pago"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="wcur">en pesos</span></button>';
+    h+='<button class="wbtn mp" type="button" data-checkout="ars" aria-label="Pagar en pesos con Mercado Pago"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="wcur">'+(rate?'≈ '+fmtArs(p.price+(cart.sup?SUP.price:0)):'en pesos')+'</span></button>';
     h+='<div class="ccrow"><i class="cc visa">VISA</i><i class="cc mc"><b></b><b></b></i><i class="cc amex">AMEX</i><i class="cc mae">Débito</i></div>';
-    h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesan PayPal o Mercado Pago: tus datos de tarjeta nunca pasan por mí. En pesos se cobra al tipo de cambio del día.</span></div>';
+    h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesan PayPal o Mercado Pago: tus datos de tarjeta nunca pasan por mí. En pesos se cobra al tipo de cambio del día'+(rate?' ('+rateLabel()+'). El monto final lo confirma Mercado Pago.':'.')+'</span></div>';
     h+='<div class="cv-note">'+ICK+'<span>Después de pagar te escribo para coordinar el arranque.</span></div>';
     return h;
   }
