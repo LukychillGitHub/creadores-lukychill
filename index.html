@@ -832,8 +832,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&(saved.plan in PLANS||saved.plan===null)){cart.plan=saved.plan;cart.sup=!!saved.sup&&!!saved.plan;if(saved.cur==='ars'||saved.cur==='usd')cart.cur=saved.cur;}}catch(e){}
 
   /* ===== Cotización del dólar (precio aproximado en pesos) ===== */
-  // Tipo de dólar para mostrar: 'oficial', 'blue' o 'bolsa' (MEP). Fuente: dolarapi.com
-  var DOLAR_TIPO='oficial', DOLAR_NOMBRE={oficial:'oficial',blue:'blue',bolsa:'MEP'}, rate=null, rateDate=null;
+  // Tipo de dólar para mostrar: 'tarjeta', 'oficial', 'blue' o 'bolsa' (MEP). Fuente: dolarapi.com
+  var DOLAR_TIPO='tarjeta', DOLAR_NOMBRE={oficial:'oficial',blue:'blue',bolsa:'MEP',tarjeta:'tarjeta'}, rate=null, rateDate=null;
   function fmtArs(n){var v=Math.round(n*rate/100)*100;return '$ '+v.toLocaleString('es-AR')}
   function applyRate(){
     if(!rate)return;
