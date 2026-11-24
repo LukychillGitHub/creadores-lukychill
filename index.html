@@ -293,6 +293,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .cv-row.big strong{font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--ink)}
 .cv-row.sub{color:var(--muted);font-size:.88rem}
 .cv-go{width:100%;margin-top:14px}
+.wbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;border:0;border-radius:10px;height:50px;margin-bottom:9px;cursor:pointer;font:inherit;transition:filter .15s,transform .15s}
+.wbtn:hover{filter:brightness(.96);transform:translateY(-1px)}
+.wbtn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wbtn.pp{background:#ffc439}
+.wbtn.mp{background:#009ee3}
+.wbtn .logo-pp{background:none;padding:0;font-size:1.3rem}
+.wbtn.mp .logo-mp{background:none;color:#fff;font-size:1.05rem;padding:0}
+.wbtn.mp .logo-mp i{background:#fff}
+.wbtn.mp .logo-mp i::after{border-color:#009ee3}
+.wcur{position:absolute;right:14px;font-size:.74rem;font-weight:700;opacity:.75}
+.wbtn.pp .wcur{color:#111}.wbtn.mp .wcur{color:#fff}
+.ccrow{display:flex;justify-content:center;gap:6px;margin:4px 0 2px}
 .pm{display:flex;flex-direction:column;gap:8px}
 .pm-opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s}
 .pm-opt:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
@@ -833,15 +845,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     h+='</div>';
     if(!cart.sup) h+='<div class="cv-up"><span>¿Sumás soporte mensual por '+usd(SUP.price)+'/mes?</span><button type="button" data-addsup>Sumar</button></div>';
     if(cart.plan==='starter') h+='<div class="cv-up"><span>Con Pro sumás varios formatos e ideas con datos.</span><button type="button" data-topro>Pasar a Pro</button></div>';
-    var cur=cart.cur||'usd';
-    var VISA='<i class="cc visa">VISA</i>',MC='<i class="cc mc"><b></b><b></b></i>',AMEX='<i class="cc amex">AMEX</i>',MAE='<i class="cc mae">Débito</i>';
-    h+='<div class="paywith">Método de pago</div><div class="pm" role="radiogroup" aria-label="Método de pago">';
-    h+='<button type="button" class="pm-opt'+(cur==='usd'?' on':'')+'" role="radio" aria-checked="'+(cur==='usd')+'" data-cur="usd"><span class="rad"></span><span class="pm-b"><span class="pm-top"><span class="logo-pp"><b>Pay</b><b>Pal</b></span><span class="pm-cur">USD</span></span><small>Saldo PayPal o tarjeta internacional</small><span class="ccs">'+VISA+MC+AMEX+'</span></span></button>';
-    h+='<button type="button" class="pm-opt'+(cur==='ars'?' on':'')+'" role="radio" aria-checked="'+(cur==='ars')+'" data-cur="ars"><span class="rad"></span><span class="pm-b"><span class="pm-top"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="pm-cur">ARS</span></span><small>Tarjeta, débito o dinero en cuenta, en pesos</small><span class="ccs">'+VISA+MC+MAE+'</span></span></button>';
-    h+='</div>';
-    h+='<button class="paygo '+(cur==='usd'?'pp':'mp')+'" type="button" data-checkout="'+cur+'"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>'+(cur==='usd'?'Pagar '+usd(p.price+(cart.sup?SUP.price:0))+' con PayPal':'Pagar en pesos con Mercado Pago')+'</button>';
-    h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesa '+(cur==='usd'?'PayPal':'Mercado Pago')+': tus datos de tarjeta nunca pasan por mí.</span></div>';
-    if(cur==='ars') h+='<div class="cv-note">'+ICK+'<span>En pesos se cobra el equivalente al tipo de cambio del día.</span></div>';
+    var tot=usd(p.price+(cart.sup?SUP.price:0));
+    h+='<div class="paywith">Pagá con</div>';
+    h+='<button class="wbtn pp" type="button" data-checkout="usd" aria-label="Pagar '+tot+' con PayPal"><span class="logo-pp"><b>Pay</b><b>Pal</b></span><span class="wcur">'+tot+'</span></button>';
+    h+='<button class="wbtn mp" type="button" data-checkout="ars" aria-label="Pagar en pesos con Mercado Pago"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="wcur">en pesos</span></button>';
+    h+='<div class="ccrow"><i class="cc visa">VISA</i><i class="cc mc"><b></b><b></b></i><i class="cc amex">AMEX</i><i class="cc mae">Débito</i></div>';
+    h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesan PayPal o Mercado Pago: tus datos de tarjeta nunca pasan por mí. En pesos se cobra al tipo de cambio del día.</span></div>';
     h+='<div class="cv-note">'+ICK+'<span>Después de pagar te escribo para coordinar el arranque.</span></div>';
     return h;
   }
