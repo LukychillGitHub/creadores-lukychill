@@ -584,7 +584,7 @@ body.checkout .sec-head{margin-bottom:26px}
       <div><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg><span><b>Pagás en pesos o en dólares</b>Con Mercado Pago o PayPal. Tus datos de tarjeta nunca pasan por mí.</span></div>
       <div><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 4v5h-5"/></svg><span><b>Soporte sin atadura</b>El mensual lo cancelás cuando quieras. Tu sistema sigue funcionando igual.</span></div>
       <div><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span><b>El sistema es tuyo</b>Queda instalado en tu compu. Sin pagar por video ni límites de uso.</span></div>
-      <div><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span><b>¿Dudas antes de comprar?</b><a href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Hacé el diagnóstico gratis</a> y te digo qué plan te conviene.</span></div>
+      <div><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span><b>¿Dudas antes de comprar?</b><a href="diagnostico.html">Hacé el diagnóstico gratis</a> y te digo qué plan te conviene.</span></div>
     </div>
 
 
@@ -628,7 +628,7 @@ body.checkout .sec-head{margin-bottom:26px}
 <footer>
   <div class="wrap">
     <span>© 2026 Lukychill · Automatizaciones para creadores</span>
-    <span class="flinks"><a href="#planes">Planes</a><a href="#faq">Preguntas</a><a href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Diagnóstico gratis</a></span>
+    <span class="flinks"><a href="#planes">Planes</a><a href="#faq">Preguntas</a><a href="diagnostico.html">Diagnóstico gratis</a></span>
   </div>
 </footer>
 
@@ -648,7 +648,7 @@ body.checkout .sec-head{margin-bottom:26px}
     <h3 id="modal-t">¡Buena elección!</h3>
     <p id="modal-p">Estoy terminando de habilitar el pago online. Dejame tus datos en el formulario y te mando el link de pago de tu pedido.</p>
     <div class="modal-sum" id="modal-sum"></div>
-    <a class="btn btn-main" id="modal-go" href="https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform" target="_blank" rel="noopener">Dejar mis datos</a>
+    <a class="btn btn-main" id="modal-go" href="diagnostico.html">Dejar mis datos</a>
   </div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -767,7 +767,7 @@ body.checkout .sec-head{margin-bottom:26px}
   // Cobro en dólares con PayPal (botones oficiales: cuenta PayPal o tarjeta sin cuenta). Servidor: función paypal en Supabase.
   var PP_API='https://tordvdesfpgahqhyvrxh.supabase.co/functions/v1/paypal';
   var PP_CLIENT='BAAk-I71iPAhmf9pzDyJctorVUX4kFwh9zUrQQFHC6beXIShL6WyxqiXQwFVjZXtUHKAGQHvW1U7EgHpLQ';
-  var FORM_URL='https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform';
+  var FORM_URL='diagnostico.html';
   var ppLoad=null;
   function loadPP(){
     if(ppLoad)return ppLoad;

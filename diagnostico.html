@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico gratis · Lukychill</title>
+<meta name="description" content="Contestá 5 preguntas sobre tu canal y te digo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.">
+<meta name="theme-color" content="#0d0d10">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Diagnóstico gratis: ¿cuánto podés automatizar? · Lukychill">
+<meta property="og:description" content="5 preguntas sobre tu canal y te digo qué podés automatizar y cuántas horas te ahorrás.">
+<meta property="og:image" content="https://creadores.lukychill.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d10; --bg2:#141418; --surface:#1a1a20; --surface2:#22222a; --ink:#f4f2ec; --muted:#a2a1ab; --line:#2c2c35;
+  --accent:#ff6a2b; --accent2:#ffc531; --accent-ink:#14100c; --good:#35d07f; --bad:#ff5d5d;
+  --glow:rgba(255,106,43,.18);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#fbf9f5; --bg2:#f3efe7; --surface:#ffffff; --surface2:#f6f2ea; --ink:#16151a; --muted:#5f5d66; --line:#e6e1d6;
+    --accent:#f05a1a; --accent2:#e0a500; --accent-ink:#ffffff; --good:#1f9d5c; --bad:#d64545;
+    --glow:rgba(240,90,26,.12);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#fbf9f5; --bg2:#f3efe7; --surface:#ffffff; --surface2:#f6f2ea; --ink:#16151a; --muted:#5f5d66; --line:#e6e1d6;
+  --accent:#f05a1a; --accent2:#e0a500; --accent-ink:#ffffff; --good:#1f9d5c; --bad:#d64545;
+  --glow:rgba(240,90,26,.12);
+}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-20% -10% auto;height:70vh;background:radial-gradient(ellipse at 50% 0%,var(--glow),transparent 65%);pointer-events:none;z-index:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px;width:100%}
+h1,h2{font-family:"Bricolage Grotesque",Inter,sans-serif;letter-spacing:-.02em;margin:0}
+p{margin:0}
+.hl{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:14px}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--accent);border-radius:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1rem;font-family:inherit;transition:transform .15s ease,box-shadow .15s ease,opacity .15s;border:1.5px solid transparent;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-main{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 30px var(--glow)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.15rem;color:var(--ink);text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-style:normal;color:#14100c;font-size:.9rem}
+.back{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:600}
+.back:hover{color:var(--ink)}
+main{position:relative;z-index:1;flex:1;padding:48px 0 72px}
+.shell{max-width:640px;margin:0 auto}
+.intro{text-align:center;margin-bottom:28px}
+.intro h1{font-size:clamp(2rem,6vw,3rem);line-height:1.05;font-weight:800;margin-bottom:12px}
+.intro p{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto}
+.perks{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:.88rem;color:var(--muted)}
+.perks span{display:inline-flex;align-items:center;gap:6px}
+.perks svg{width:15px;height:15px;stroke:var(--good);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-size:.85rem;color:var(--muted);font-weight:600}
+.bar{flex:1;height:6px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .35s ease}
+.step{display:none;animation:in .35s ease}
+.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.q{font-family:"Bricolage Grotesque",Inter,sans-serif;font-size:clamp(1.35rem,4vw,1.7rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:6px}
+.hint{color:var(--muted);font-size:.92rem;margin-bottom:18px}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{position:relative;display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg2);cursor:pointer;font-weight:500;transition:border-color .15s,background .15s,transform .1s;user-select:none}
+.opt:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.opt:active{transform:scale(.99)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .mk{flex:none;width:20px;height:20px;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;transition:all .15s}
+.opt.radio .mk{border-radius:50%}
+.opt .mk svg{width:12px;height:12px;stroke:var(--accent-ink);fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.opt:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--bg2))}
+.opt:has(input:checked) .mk{background:var(--accent);border-color:var(--accent)}
+.opt:has(input:checked) .mk svg{opacity:1}
+.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.field{width:100%;padding:15px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg2);color:var(--ink);font:inherit;font-size:1rem;transition:border-color .15s}
+.field:focus{outline:none;border-color:var(--accent)}
+.field::placeholder{color:var(--muted);opacity:.8}
+.other{margin-top:10px;display:none}
+.other.on{display:block}
+.lbl{display:block;font-weight:600;font-size:.92rem;margin:14px 0 6px}
+.lbl:first-of-type{margin-top:0}
+.err{color:var(--bad);font-size:.88rem;margin-top:10px;min-height:1.2em}
+.acts{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
+.acts .btn-main{margin-left:auto}
+.done{text-align:center;padding:12px 0}
+.done .ic{width:64px;height:64px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:color-mix(in srgb,var(--good) 16%,transparent)}
+.done .ic svg{width:30px;height:30px;stroke:var(--good);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.done h2{font-size:clamp(1.6rem,5vw,2.1rem);font-weight:800;margin-bottom:10px}
+.done p{color:var(--muted);max-width:440px;margin:0 auto 22px}
+.done .row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.priv{text-align:center;color:var(--muted);font-size:.82rem;margin-top:16px}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+@media (max-width:560px){
+  main{padding:28px 0 48px}
+  .card{padding:20px;border-radius:18px}
+  .opts.two{grid-template-columns:1fr}
+  .acts .btn{padding:14px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="./"><i>L</i>Lukychill</a>
+    <a class="back" href="./">← Volver a la página</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="shell">
+      <div class="intro" id="intro">
+        <span class="eyebrow">Diagnóstico gratis</span>
+        <h1>¿Cuánto podés <span class="hl">automatizar</span>?</h1>
+        <p>Contestá 5 preguntas sobre tu canal y te devuelvo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.</p>
+        <div class="perks">
+          <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>2 minutos</span>
+          <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Sin compromiso</span>
+          <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Respuesta personal</span>
+        </div>
+      </div>
+
+      <form class="card" id="f" novalidate>
+        <div class="prog" id="prog"><div class="bar"><i id="bar"></i></div><span id="pn">1 de 7</span></div>
+
+        <div class="step on" data-step="1">
+          <p class="q">¿Qué tipo de videos subís?</p>
+          <p class="hint">Podés elegir varios.</p>
+          <div class="opts two" data-name="tipo" data-type="check"></div>
+          <input class="field other" id="tipo-otro" placeholder="¿Cuál? Contame en pocas palabras" maxlength="120">
+        </div>
+
+        <div class="step" data-step="2">
+          <p class="q">¿Cuántos videos publicás por semana?</p>
+          <p class="hint">Elegí una opción.</p>
+          <div class="opts" data-name="semana" data-type="radio"></div>
+        </div>
+
+        <div class="step" data-step="3">
+          <p class="q">¿Cuánto tardás en editar un video?</p>
+          <p class="hint">Elegí una opción.</p>
+          <div class="opts" data-name="edicion" data-type="radio"></div>
+        </div>
+
+        <div class="step" data-step="4">
+          <p class="q">¿Qué es lo que más te pesa de crear contenido?</p>
+          <p class="hint">Podés elegir varios.</p>
+          <div class="opts two" data-name="pesa" data-type="check"></div>
+        </div>
+
+        <div class="step" data-step="5">
+          <p class="q">¿Tenés una identidad visual definida?</p>
+          <p class="hint">Fuentes y colores de tu marca.</p>
+          <div class="opts" data-name="marca" data-type="radio"></div>
+        </div>
+
+        <div class="step" data-step="6">
+          <p class="q">¿Dónde te veo?</p>
+          <p class="hint">Así miro tus videos antes de armarte el diagnóstico.</p>
+          <label class="lbl" for="perfil">Link a tu perfil principal</label>
+          <input class="field" id="perfil" type="url" inputmode="url" autocomplete="url" placeholder="tiktok.com/@tucanal, instagram.com/… o youtube.com/@…" maxlength="300">
+        </div>
+
+        <div class="step" data-step="7">
+          <p class="q">¿Cómo te mando el diagnóstico?</p>
+          <p class="hint">Te respondo en persona, sin mensajes automáticos.</p>
+          <label class="lbl" for="nombre">Tu nombre</label>
+          <input class="field" id="nombre" autocomplete="name" placeholder="Cómo te llamás" maxlength="80">
+          <label class="lbl" for="contacto">WhatsApp o email</label>
+          <input class="field" id="contacto" autocomplete="email" placeholder="+54 9 11 … o tu@email.com" maxlength="120">
+        </div>
+
+        <div class="step" data-step="8">
+          <div class="done">
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+            <h2>¡Listo, ya lo tengo!</h2>
+            <p id="done-p">Miro tu canal y te escribo con qué podés automatizar, cuántas horas te ahorrás y qué plan te conviene.</p>
+            <div class="row">
+              <a class="btn btn-main" href="./#planes">Ver planes y precios</a>
+              <a class="btn btn-ghost" href="./">Volver al inicio</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="err" id="err" role="alert"></p>
+        <div class="acts" id="acts">
+          <button class="btn btn-ghost" type="button" id="prev" hidden>Atrás</button>
+          <button class="btn btn-main" type="submit" id="next">Siguiente <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </form>
+      <p class="priv" id="priv">Tus datos solo se usan para mandarte el diagnóstico.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lukychill · Automatizaciones para creadores</span>
+    <span><a href="./">Inicio</a> · <a href="./#planes">Planes</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Las respuestas van al Google Form de siempre (mismas preguntas), así llegan a la pestaña Respuestas. */
+  var GF='https://docs.google.com/forms/d/e/1FAIpQLSdi_VbnN6eLXi9TmBZyobSm_aoFTSxMWynlOknstQzanjylSw/formResponse';
+  var GF_VIEW='https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform';
+  var Q={
+    tipo:{id:1261402362,opts:['Tutoriales o educativos','Opinión o charla a cámara','Reseñas','Venta de productos o servicios','Gaming','Vlogs','Otro']},
+    semana:{id:34736905,opts:['1 o 2','3 a 5','6 o más']},
+    edicion:{id:1877983031,opts:['Menos de 30 minutos','Entre 30 minutos y 1 hora','Entre 1 y 2 horas','Más de 2 horas']},
+    pesa:{id:154466540,opts:['Cortar y armar el video','Poner subtítulos','Efectos, zooms y ritmo','Música y sonido','Pensar ideas','Hacer carruseles o miniaturas']},
+    marca:{id:516786414,opts:['Sí, tengo fuentes y colores definidos','Más o menos','No, todavía no']},
+    perfil:{id:727305969},contacto:{id:1013500913}
+  };
+  var TOTAL=7,cur=1,f=document.getElementById('f'),$=function(s){return document.getElementById(s)};
+  var CK='<span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>';
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  document.querySelectorAll('.opts').forEach(function(box){
+    var n=box.dataset.name,t=box.dataset.type==='check'?'checkbox':'radio';
+    box.innerHTML=Q[n].opts.map(function(o){return '<label class="opt'+(t==='radio'?' radio':'')+'"><input type="'+t+'" name="'+n+'" value="'+esc(o)+'">'+CK+'<span>'+esc(o)+'</span></label>'}).join('');
+  });
+  var otro=$('tipo-otro');
+  f.addEventListener('change',function(e){
+    if(e.target.name==='tipo'){var on=!!f.querySelector('input[name=tipo][value="Otro"]:checked');otro.classList.toggle('on',on);if(on&&e.target.value==='Otro'&&e.target.checked)otro.focus()}
+    $('err').textContent='';
+    if(e.target.type==='radio'&&cur<TOTAL)setTimeout(function(){if(valid(cur))go(cur+1)},220);
+  });
+  function vals(n){return Array.prototype.map.call(f.querySelectorAll('input[name='+n+']:checked'),function(i){return i.value})}
+  function valid(s){
+    var m='';
+    if(s===1){if(!vals('tipo').length)m='Elegí al menos una opción.';else if(vals('tipo').indexOf('Otro')>-1&&!otro.value.trim())m='Contame qué tipo de videos hacés.'}
+    if(s===2&&!vals('semana').length)m='Elegí una opción.';
+    if(s===3&&!vals('edicion').length)m='Elegí una opción.';
+    if(s===4&&!vals('pesa').length)m='Elegí al menos una opción.';
+    if(s===5&&!vals('marca').length)m='Elegí una opción.';
+    if(s===6&&$('perfil').value.trim().length<4)m='Pegá el link a tu perfil.';
+    if(s===7){if(!$('nombre').value.trim())m='Decime tu nombre.';else if($('contacto').value.trim().length<6)m='Dejame un WhatsApp o email para responderte.'}
+    $('err').textContent=m;return !m;
+  }
+  function go(s){
+    cur=s;
+    document.querySelectorAll('.step').forEach(function(el){el.classList.toggle('on',+el.dataset.step===s)});
+    var done=s>TOTAL;
+    $('bar').style.width=(done?100:((s-1)/TOTAL*100))+'%';
+    $('pn').textContent=done?'Completado':s+' de '+TOTAL;
+    $('prev').hidden=s===1||done;
+    $('acts').hidden=done;$('priv').hidden=done;
+    $('next').innerHTML=s===TOTAL?'Enviar diagnóstico':'Siguiente <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    $('err').textContent='';
+    var first=document.querySelector('.step.on input');
+    if(first&&window.innerWidth>560&&(first.classList.contains('field')))first.focus();
+    if(s>1)f.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('prev').addEventListener('click',function(){if(cur>1)go(cur-1)});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!valid(cur))return;
+    if(cur<TOTAL){go(cur+1);return}
+    var p=new URLSearchParams();
+    vals('tipo').forEach(function(v){if(v==='Otro'){p.append('entry.'+Q.tipo.id,'__other_option__');p.append('entry.'+Q.tipo.id+'.other_option_response',otro.value.trim())}else p.append('entry.'+Q.tipo.id,v)});
+    ['semana','edicion','pesa','marca'].forEach(function(n){vals(n).forEach(function(v){p.append('entry.'+Q[n].id,v)})});
+    p.append('entry.'+Q.perfil.id,$('perfil').value.trim());
+    p.append('entry.'+Q.contacto.id,$('nombre').value.trim()+' · '+$('contacto').value.trim());
+    var b=$('next');b.disabled=true;b.textContent='Enviando…';
+    fetch(GF,{method:'POST',mode:'no-cors',body:p}).then(function(){
+      var nm=$('nombre').value.trim().split(' ')[0];
+      if(nm)document.querySelector('.done h2').textContent='¡Gracias, '+nm+'!';
+      go(TOTAL+1);
+    }).catch(function(){
+      b.disabled=false;b.textContent='Enviar diagnóstico';
+      $('err').innerHTML='No se pudo enviar. Revisá tu conexión o <a href="'+GF_VIEW+'" target="_blank" rel="noopener" style="color:inherit">completalo acá</a>.';
+    });
+  });
+  go(1);
+})();
+</script>
+</body>
+</html>
