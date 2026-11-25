@@ -771,7 +771,7 @@ body.checkout .sec-head{margin-bottom:26px}
   var ppLoad=null;
   function loadPP(){
     if(ppLoad)return ppLoad;
-    ppLoad=new Promise(function(ok,ko){var sc=document.createElement('script');sc.src='https://www.paypal.com/sdk/js?client-id='+PP_CLIENT+'&currency=USD&intent=capture&components=buttons&enable-funding=card&locale=es_AR';sc.onload=ok;sc.onerror=function(){ppLoad=null;ko()};document.head.appendChild(sc)});
+    ppLoad=ppCall({action:'config'}).then(function(c){return c.clientId||PP_CLIENT},function(){return PP_CLIENT}).then(function(id){return new Promise(function(ok,ko){var sc=document.createElement('script');sc.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(id)+'&currency=USD&intent=capture&components=buttons&enable-funding=card&locale=es_AR';sc.onload=ok;sc.onerror=function(){ppLoad=null;ko()};document.head.appendChild(sc)})});
     return ppLoad;
   }
   function ppCall(body){return fetch(PP_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.ok?r.json():Promise.reject(r.status)})}
