@@ -745,8 +745,28 @@ body.checkout .sec-head{margin-bottom:26px}
   function openCart(){$('#drawer').hidden=false;$('#drawer-bg').hidden=false;document.body.style.overflow='hidden';setTimeout(function(){var x=$('#drawer .x');x&&x.focus()},50)}
   function closeCart(){$('#drawer').hidden=true;$('#drawer-bg').hidden=true;document.body.style.overflow=''}
   var MODAL_DEFAULT=null,MODAL_X='<button type="button" class="x" data-close-modal aria-label="Cerrar">×</button>';
+  // Cobro en pesos con la API de Mercado Pago (función crear-pago en Supabase). Si falla, cae al formulario.
+  var MP_API='https://tordvdesfpgahqhyvrxh.supabase.co/functions/v1/crear-pago';
+  function pesos(n){return '$'+Math.round(n).toLocaleString('es-AR')}
+  function checkoutMP(){
+    var p=PLANS[cart.plan],m=$('#modal-box'),sup=cart.sup;
+    m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">Preparando tu pago…</h3><p>Te llevamos a Mercado Pago en un instante.</p>';
+    closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
+    fetch(MP_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:cart.plan,sup:sup})})
+      .then(function(r){return r.ok?r.json():Promise.reject(r.status)})
+      .then(function(d){
+        if(!d.pago)throw 0;
+        if(!sup||!d.soporte){window.location.href=d.pago;return}
+        m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">Tu pago en 2 pasos</h3><p>Mercado Pago cobra el armado y el soporte mensual por separado. Hacé los dos pagos en este orden:</p>'+
+          '<div class="modal-sum"><div><span>Plan '+p.name+'</span><b>'+pesos(d.monto)+'</b></div><div><span>'+SUP.name+'</span><b>'+pesos(d.montoSoporte)+'/mes</b></div></div>'+
+          '<a class="btn btn-main" href="'+d.pago+'" target="_blank" rel="noopener">1. Pagar el armado ('+pesos(d.monto)+')</a>'+
+          '<a class="btn btn-ghost" style="margin-top:10px" href="'+d.soporte+'" target="_blank" rel="noopener">2. Activar el soporte mensual ('+pesos(d.montoSoporte)+'/mes)</a>';
+      })
+      .catch(function(){m.innerHTML=MODAL_DEFAULT;var s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>'+(sup?'<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>':'');$('#modal-sum')&&($('#modal-sum').innerHTML=s)});
+  }
   function checkout(cur){
     if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
+    if(cur==='ars'&&MP_API){checkoutMP();return}
     var L=PAYMENT_LINKS[cur]||{},p=PLANS[cart.plan],s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>';
     if(cart.sup)s+='<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>';
     var url=cur==='ars'?L[cart.plan]:L[cart.plan+(cart.sup?'+soporte':'')];
