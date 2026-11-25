@@ -14,6 +14,9 @@
 <meta property="og:description" content="Sistemas de edición e ideas automáticas hechos a medida para creadores de contenido.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://creadores.lukychill.com/og-image.jpg">
+<meta property="og:url" content="https://creadores.lukychill.com/comprar.html">
+<meta property="og:locale" content="es_AR">
+<link rel="canonical" href="https://creadores.lukychill.com/comprar.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -433,6 +436,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
   .plan .for{min-height:0}
 }
+.navdx{white-space:nowrap}
+.reqs{display:inline-flex;align-items:flex-start;gap:10px;margin:18px auto 0;padding:10px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:.9rem;color:var(--muted);text-align:left;max-width:640px}
+.reqs svg{width:18px;height:18px;flex:none;margin-top:2px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:480px){.navdx{padding:9px 14px;font-size:.85rem}.nd-g{display:none}}
 @media (max-width:420px){
   .phone{width:168px}.phone.before{width:138px}
   .phones{gap:10px}
@@ -529,6 +536,7 @@ footer .flinks{flex-wrap:wrap}
       <span class="eyebrow">Tu compra</span>
       <h2>Armá tu pedido.</h2>
       <p>Elegí tu plan, sumá el soporte mensual si lo querés y pagá en pesos o en dólares. El armado se paga una sola vez y el sistema queda tuyo.</p>
+      <p class="reqs"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span>Para usarlo necesitás una compu con Windows o Mac y tu suscripción a Claude (desde USD 20 por mes). Todo lo demás lo instalo yo.</span></p>
     </div>
 
     <ol class="co-steps" aria-label="Pasos"><li class="on"><b>1</b>Plan</li><li><b>2</b>Soporte</li><li><b>3</b>Pago</li></ol>
@@ -600,7 +608,7 @@ footer .flinks{flex-wrap:wrap}
     <div class="after reveal">
       <h3>Qué pasa después de pagar</h3>
       <ol>
-        <li><b>1</b><div><strong>Te escribo</strong><span>Coordinamos el arranque por mensaje.</span></div></li>
+        <li><b>1</b><div><strong>Te llega la confirmación</strong><span>Un mail con tu compra y los próximos pasos. Te escribo para coordinar el arranque.</span></div></li>
         <li><b>2</b><div><strong>Conozco tu canal</strong><span>Me mostrás tus videos, tu estilo y lo que querés automatizar.</span></div></li>
         <li><b>3</b><div><strong>Armo tu sistema</strong><span>Lo configuro con tu marca y lo instalo en tu compu.</span></div></li>
         <li><b>4</b><div><strong>Lo probás</strong><span>Editamos tus primeros videos y ajustamos hasta que quede como querés.</span></div></li>
@@ -700,7 +708,7 @@ footer .flinks{flex-wrap:wrap}
   /* ===== Cotización del dólar (precio aproximado en pesos) ===== */
   // Tipo de dólar para mostrar: 'tarjeta', 'oficial', 'blue' o 'bolsa' (MEP). Fuente: dolarapi.com
   var DOLAR_TIPO='tarjeta', DOLAR_NOMBRE={oficial:'oficial',blue:'blue',bolsa:'MEP',tarjeta:'tarjeta'}, rate=null, rateDate=null;
-  function fmtArs(n){var v=Math.round(n*rate/100)*100;return '$ '+v.toLocaleString('es-AR')}
+  function fmtArs(n){var v=Math.ceil(n*rate/100)*100;return '$ '+v.toLocaleString('es-AR')}
   function applyRate(){
     if(!rate)return;
     $$('[data-ars]').forEach(function(el){el.textContent='≈ '+fmtArs(+el.dataset.ars)+' ARS'+(el.dataset.suffix||'');el.hidden=false});
@@ -738,7 +746,7 @@ footer .flinks{flex-wrap:wrap}
     h+='<button class="wbtn mp" type="button" data-checkout="ars" aria-label="Pagar en pesos con Mercado Pago"><span class="logo-mp"><i></i>mercado<b>pago</b></span><span class="wcur">'+(rate?'≈ '+fmtArs(p.price+(cart.sup?SUP.price:0)):'en pesos')+'</span></button>';
     h+='<div class="ccrow"><i class="cc visa">VISA</i><i class="cc mc"><b></b><b></b></i><i class="cc amex">AMEX</i><i class="cc mae">Débito</i></div>';
     h+='<div class="secure"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span>Pago seguro y encriptado. Lo procesan PayPal o Mercado Pago: tus datos de tarjeta nunca pasan por mí. En pesos se cobra al tipo de cambio del día'+(rate?' ('+rateLabel()+'). El monto final lo confirma Mercado Pago.':'.')+'</span></div>';
-    h+='<div class="cv-note">'+ICK+'<span>Después de pagar te escribo para coordinar el arranque.</span></div>';
+    h+='<div class="cv-note">'+ICK+'<span>Al pagar te llega un mail con los próximos pasos y te escribo para coordinar el arranque.</span></div>';
     return h;
   }
   function render(){
