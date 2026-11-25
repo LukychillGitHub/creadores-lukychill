@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diagnóstico gratis · Lukychill</title>
-<meta name="description" content="Contestá 5 preguntas sobre tu canal y te digo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.">
+<meta name="description" content="Contestá unas preguntas rápidas sobre tu canal y te digo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.">
 <meta name="theme-color" content="#0d0d10">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:title" content="Diagnóstico gratis: ¿cuánto podés automatizar? · Lukychill">
-<meta property="og:description" content="5 preguntas sobre tu canal y te digo qué podés automatizar y cuántas horas te ahorrás.">
+<meta property="og:description" content="Unas preguntas rápidas sobre tu canal y te digo qué podés automatizar y cuántas horas te ahorrás.">
 <meta property="og:image" content="https://creadores.lukychill.com/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,7 +130,7 @@ footer a:hover{color:var(--ink)}
       <div class="intro" id="intro">
         <span class="eyebrow">Diagnóstico gratis</span>
         <h1>¿Cuánto podés <span class="hl">automatizar</span>?</h1>
-        <p>Contestá 5 preguntas sobre tu canal y te devuelvo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.</p>
+        <p>Contestá unas preguntas rápidas sobre tu canal y te devuelvo qué podés automatizar, cuántas horas por semana te ahorrás y qué plan te conviene.</p>
         <div class="perks">
           <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>2 minutos</span>
           <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Sin compromiso</span>
@@ -139,10 +139,10 @@ footer a:hover{color:var(--ink)}
       </div>
 
       <form class="card" id="f" novalidate>
-        <div class="prog" id="prog"><div class="bar"><i id="bar"></i></div><span id="pn">1 de 7</span></div>
+        <div class="prog" id="prog"><div class="bar"><i id="bar"></i></div><span id="pn">1 de 8</span></div>
 
         <div class="step on" data-step="1">
-          <p class="q">¿Qué tipo de videos subís?</p>
+          <p class="q">¿Qué formatos querés automatizar?</p>
           <p class="hint">Podés elegir varios.</p>
           <div class="opts two" data-name="tipo" data-type="check"></div>
           <input class="field other" id="tipo-otro" placeholder="¿Cuál? Contame en pocas palabras" maxlength="120">
@@ -161,25 +161,31 @@ footer a:hover{color:var(--ink)}
         </div>
 
         <div class="step" data-step="4">
-          <p class="q">¿Qué es lo que más te pesa de crear contenido?</p>
+          <p class="q">¿Qué querés que haga el sistema por vos?</p>
           <p class="hint">Podés elegir varios.</p>
           <div class="opts two" data-name="pesa" data-type="check"></div>
         </div>
 
         <div class="step" data-step="5">
-          <p class="q">¿Tenés una identidad visual definida?</p>
-          <p class="hint">Fuentes y colores de tu marca.</p>
-          <div class="opts" data-name="marca" data-type="radio"></div>
+          <p class="q">¿Cómo preferís trabajar?</p>
+          <p class="hint">Elegí la que más se parezca a lo que buscás.</p>
+          <div class="opts" data-name="trabajo" data-type="radio"></div>
         </div>
 
         <div class="step" data-step="6">
+          <p class="q">¿Cuánto tenés pensado invertir para arrancar?</p>
+          <p class="hint">Así te recomiendo el plan que mejor te cierra.</p>
+          <div class="opts" data-name="presupuesto" data-type="radio"></div>
+        </div>
+
+        <div class="step" data-step="7">
           <p class="q">¿Dónde te veo?</p>
           <p class="hint">Así miro tus videos antes de armarte el diagnóstico.</p>
           <label class="lbl" for="perfil">Link a tu perfil principal</label>
           <input class="field" id="perfil" type="url" inputmode="url" autocomplete="url" placeholder="tiktok.com/@tucanal, instagram.com/… o youtube.com/@…" maxlength="300">
         </div>
 
-        <div class="step" data-step="7">
+        <div class="step" data-step="8">
           <p class="q">¿Cómo te mando el diagnóstico?</p>
           <p class="hint">Te respondo en persona, sin mensajes automáticos.</p>
           <label class="lbl" for="nombre">Tu nombre</label>
@@ -188,7 +194,7 @@ footer a:hover{color:var(--ink)}
           <input class="field" id="contacto" autocomplete="email" placeholder="+54 9 11 … o tu@email.com" maxlength="120">
         </div>
 
-        <div class="step" data-step="8">
+        <div class="step" data-step="9">
           <div class="done">
             <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
             <h2>¡Listo, ya lo tengo!</h2>
@@ -224,14 +230,15 @@ footer a:hover{color:var(--ink)}
   var GF='https://docs.google.com/forms/d/e/1FAIpQLSdi_VbnN6eLXi9TmBZyobSm_aoFTSxMWynlOknstQzanjylSw/formResponse';
   var GF_VIEW='https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform';
   var Q={
-    tipo:{id:1261402362,opts:['Tutoriales o educativos','Opinión o charla a cámara','Reseñas','Venta de productos o servicios','Gaming','Vlogs','Otro']},
+    tipo:{id:1261402362,opts:['Videos cortos verticales (Reels, TikTok, Shorts)','Videos largos para YouTube','Recortes cortos sacados de videos largos','Carruseles o miniaturas','Otro']},
     semana:{id:34736905,opts:['1 o 2','3 a 5','6 o más']},
     edicion:{id:1877983031,opts:['Menos de 30 minutos','Entre 30 minutos y 1 hora','Entre 1 y 2 horas','Más de 2 horas']},
-    pesa:{id:154466540,opts:['Cortar y armar el video','Poner subtítulos','Efectos, zooms y ritmo','Música y sonido','Pensar ideas','Hacer carruseles o miniaturas']},
-    marca:{id:516786414,opts:['Sí, tengo fuentes y colores definidos','Más o menos','No, todavía no']},
+    pesa:{id:154466540,opts:['Cortar silencios y armar el video','Subtítulos con mi estilo','Efectos, zooms y ritmo','Ideas de videos basadas en lo que me funcionó','Música y efectos de sonido','Hacer carruseles o miniaturas']},
+    trabajo:{id:516786414,opts:['Que me lo dejes andando y lo uso por mi cuenta','Que me acompañes hasta que lo domine','Que alguien lo mantenga y lo mejore todos los meses']},
+    presupuesto:{id:1117196943,opts:['Algo simple para empezar (alrededor de USD 150)','Algo completo para todo el canal (alrededor de USD 500)','Todavía no sé, quiero que me recomiendes']},
     perfil:{id:727305969},contacto:{id:1013500913}
   };
-  var TOTAL=7,cur=1,f=document.getElementById('f'),$=function(s){return document.getElementById(s)};
+  var TOTAL=8,cur=1,f=document.getElementById('f'),$=function(s){return document.getElementById(s)};
   var CK='<span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>';
   function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   document.querySelectorAll('.opts').forEach(function(box){
@@ -247,13 +254,14 @@ footer a:hover{color:var(--ink)}
   function vals(n){return Array.prototype.map.call(f.querySelectorAll('input[name='+n+']:checked'),function(i){return i.value})}
   function valid(s){
     var m='';
-    if(s===1){if(!vals('tipo').length)m='Elegí al menos una opción.';else if(vals('tipo').indexOf('Otro')>-1&&!otro.value.trim())m='Contame qué tipo de videos hacés.'}
+    if(s===1){if(!vals('tipo').length)m='Elegí al menos una opción.';else if(vals('tipo').indexOf('Otro')>-1&&!otro.value.trim())m='Contame qué otro formato querés automatizar.'}
     if(s===2&&!vals('semana').length)m='Elegí una opción.';
     if(s===3&&!vals('edicion').length)m='Elegí una opción.';
     if(s===4&&!vals('pesa').length)m='Elegí al menos una opción.';
-    if(s===5&&!vals('marca').length)m='Elegí una opción.';
-    if(s===6&&$('perfil').value.trim().length<4)m='Pegá el link a tu perfil.';
-    if(s===7){if(!$('nombre').value.trim())m='Decime tu nombre.';else if($('contacto').value.trim().length<6)m='Dejame un WhatsApp o email para responderte.'}
+    if(s===5&&!vals('trabajo').length)m='Elegí una opción.';
+    if(s===6&&!vals('presupuesto').length)m='Elegí una opción.';
+    if(s===7&&$('perfil').value.trim().length<4)m='Pegá el link a tu perfil.';
+    if(s===8){if(!$('nombre').value.trim())m='Decime tu nombre.';else if($('contacto').value.trim().length<6)m='Dejame un WhatsApp o email para responderte.'}
     $('err').textContent=m;return !m;
   }
   function go(s){
@@ -277,7 +285,7 @@ footer a:hover{color:var(--ink)}
     if(cur<TOTAL){go(cur+1);return}
     var p=new URLSearchParams();
     vals('tipo').forEach(function(v){if(v==='Otro'){p.append('entry.'+Q.tipo.id,'__other_option__');p.append('entry.'+Q.tipo.id+'.other_option_response',otro.value.trim())}else p.append('entry.'+Q.tipo.id,v)});
-    ['semana','edicion','pesa','marca'].forEach(function(n){vals(n).forEach(function(v){p.append('entry.'+Q[n].id,v)})});
+    ['semana','edicion','pesa','trabajo','presupuesto'].forEach(function(n){vals(n).forEach(function(v){p.append('entry.'+Q[n].id,v)})});
     p.append('entry.'+Q.perfil.id,$('perfil').value.trim());
     p.append('entry.'+Q.contacto.id,$('nombre').value.trim()+' · '+$('contacto').value.trim());
     var b=$('next');b.disabled=true;b.textContent='Enviando…';
