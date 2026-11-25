@@ -1070,7 +1070,7 @@ footer .flinks{flex-wrap:wrap}
       window.paypal.Buttons({
         style:{layout:'vertical',shape:'pill',label:'pay'},
         createOrder:function(){return ppCall({action:'create',plan:plan}).then(function(d){return d.id})},
-        onApprove:function(data){return ppCall({action:'capture',id:data.orderID}).then(function(d){
+        onApprove:function(data){return ppCall({action:'capture',id:data.orderID,sup:!!sup}).then(function(d){
           if(d.status!=='COMPLETED')throw 0;
           if(window.lkTrack)window.lkTrack('compra',{value:p.price,currency:'USD',plan:plan});
           try{localStorage.removeItem(KEY)}catch(e){}
