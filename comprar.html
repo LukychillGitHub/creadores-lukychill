@@ -499,6 +499,15 @@ body.checkout .sec-head{margin-bottom:26px}
 .co-steps li.on b{background:var(--accent);color:var(--accent-ink)}
 .co-steps li.ok b{background:var(--good);color:#fff}
 @media (max-width:560px){.co-secure span{display:none}.co-nav-r{gap:10px}}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.tcard .res{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.1}
+.tcard q{quotes:none;color:var(--ink);font-size:1rem}
+.tcard .who{display:flex;align-items:center;gap:10px;margin-top:auto;font-size:.9rem}
+.tcard .who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.tcard .who b{display:block}
+.tcard .who a{color:var(--muted);text-decoration:none}
+footer .flinks{flex-wrap:wrap}
 </style>
 </head>
 <body class="checkout">
@@ -583,7 +592,7 @@ body.checkout .sec-head{margin-bottom:26px}
     <div class="trustrow reveal">
       <div><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg><span><b>Pagás en pesos o en dólares</b>Con Mercado Pago o PayPal. Tus datos de tarjeta nunca pasan por mí.</span></div>
       <div><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 4v5h-5"/></svg><span><b>Soporte sin atadura</b>El mensual lo cancelás cuando quieras. Tu sistema sigue funcionando igual.</span></div>
-      <div><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span><b>El sistema es tuyo</b>Queda instalado en tu compu. Sin pagar por video ni límites de uso.</span></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Garantía de 10 días</b>Si te arrepentís, te devuelvo el 100%. <a href="reembolsos.html">Ver cómo funciona</a>.</span></div>
       <div><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span><b>¿Dudas antes de comprar?</b><a href="diagnostico.html">Hacé el diagnóstico gratis</a> y te digo qué plan te conviene.</span></div>
     </div>
 
@@ -619,6 +628,8 @@ body.checkout .sec-head{margin-bottom:26px}
     <details><summary>¿Tengo que pagar algo más?</summary><p>Solo tu propia suscripción a Claude, la inteligencia artificial que corre el sistema (desde USD 20 por mes, se la pagás directo a Anthropic). El armado y la instalación ya están incluidos en el precio del plan.</p></details>
     <details><summary>¿Starter o Pro?</summary><p>Starter si subís un solo tipo de video y querés dejar de editarlo a mano. Pro si tenés varios formatos o querés que el sistema también te diga qué grabar según tus números. Si dudás, el diagnóstico gratis te lo dice.</p></details>
     <details><summary>¿El sistema es mío?</summary><p>Sí. Queda instalado en tu compu y lo usás todas las veces que quieras, sin pagar por video.</p></details>
+    <details><summary>¿Y si no me convence?</summary><p>Tenés 10 días corridos desde la compra para arrepentirte y te devuelvo el 100%, sin vueltas. Después, si todavía no te entregué el sistema, te devuelvo la parte no hecha. Está todo en <a href="reembolsos.html">reembolsos</a>.</p></details>
+    <details><summary>¿Cómo te escribo si tengo una duda?</summary><p>Desde el botón <a href="#contacto" data-contacto="Consulta">¿Tenés dudas?</a> que está abajo a la derecha. Te respondo por mail, normalmente en el día.</p></details>
     <details><summary>¿Cómo es el diagnóstico gratis?</summary><p>Contestás unas preguntas cortas sobre tu canal (toma dos minutos) y te mando qué podés automatizar, cuántas horas te ahorrás y qué plan te conviene. Sin compromiso.</p></details>
   </div>
 </section>
@@ -628,7 +639,7 @@ body.checkout .sec-head{margin-bottom:26px}
 <footer>
   <div class="wrap">
     <span>© 2026 Lukychill · Automatizaciones para creadores</span>
-    <span class="flinks"><a href="#planes">Planes</a><a href="#faq">Preguntas</a><a href="diagnostico.html">Diagnóstico gratis</a></span>
+    <span class="flinks"><a href="#planes">Planes</a><a href="#faq">Preguntas</a><a href="diagnostico.html">Diagnóstico gratis</a><a href="terminos.html">Términos</a><a href="privacidad.html">Privacidad</a><a href="reembolsos.html">Reembolsos</a><a href="arrepentimiento.html">Botón de arrepentimiento</a></span>
   </div>
 </footer>
 
@@ -788,6 +799,7 @@ body.checkout .sec-head{margin-bottom:26px}
         createOrder:function(){return ppCall({action:'create',plan:plan}).then(function(d){return d.id})},
         onApprove:function(data){return ppCall({action:'capture',id:data.orderID}).then(function(d){
           if(d.status!=='COMPLETED')throw 0;
+          if(window.lkTrack)window.lkTrack('compra',{value:p.price,currency:'USD',plan:plan});
           try{localStorage.removeItem(KEY)}catch(e){}
           if(sup){
             m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">¡Armado pagado! Falta 1 paso</h3><p>Ahora activá el soporte mensual. PayPal lo cobra solo cada mes y lo podés cancelar cuando quieras desde tu cuenta.</p>'+sum+'<button class="btn btn-main" type="button" id="pp-sub">2. Activar el soporte ('+usd(SUP.price)+'/mes)</button><a class="btn btn-ghost" style="margin-top:10px" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>';
@@ -800,7 +812,15 @@ body.checkout .sec-head{margin-bottom:26px}
       }).render('#pp-btns');
     }).catch(function(){m.innerHTML=MODAL_DEFAULT;$('#modal-sum')&&($('#modal-sum').innerHTML=rows)});
   }
+  /* Testimonios: completar con casos reales (con permiso). La sección se muestra sola cuando hay al menos uno.
+     {resultado:'De 3 h a 40 min por video', texto:'…', nombre:'…', canal:'@…', link:'https://…', foto:'media/…jpg'} */
+  var TESTIMONIOS=[];
+  (function(){var sec=$('#testimonios'),g=$('#tgrid');if(!sec||!g||!TESTIMONIOS.length)return;
+    function e(x){return String(x||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+    g.innerHTML=TESTIMONIOS.map(function(t){return '<figure class="tcard reveal in">'+(t.resultado?'<div class="res hl">'+e(t.resultado)+'</div>':'')+'<q>'+e(t.texto)+'</q><figcaption class="who">'+(t.foto?'<img src="'+e(t.foto)+'" alt="" loading="lazy" width="40" height="40">':'')+'<span><b>'+e(t.nombre)+'</b>'+(t.link?'<a href="'+e(t.link)+'" target="_blank" rel="noopener">'+e(t.canal)+'</a>':e(t.canal))+'</span></figcaption></figure>'}).join('');
+    sec.hidden=false;})();
   function checkout(cur){
+    if(window.lkTrack)window.lkTrack('inicio_pago',{plan:cart.plan,moneda:cur,soporte:cart.sup});
     if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
     if(cur==='ars'&&MP_API){checkoutMP();return}
     if(cur==='usd'&&PP_API){checkoutPP();return}
@@ -844,7 +864,7 @@ body.checkout .sec-head{margin-bottom:26px}
     pendiente:['Tu pago está en proceso','Apenas se acredite te escribo. Mientras tanto podés completar el diagnóstico.',1],
     error:['El pago no se completó','No se cobró nada. Podés intentarlo de nuevo cuando quieras.',0],
     cancelado:['No se activó el soporte','No se cobró nada. Podés activarlo más adelante o escribirme por el formulario.',0]}[pg];
-    if(PG){if(PG[2]){try{localStorage.removeItem(KEY)}catch(e){}cart.plan=null;cart.sup=false;render()}
+    if(PG){if(pg==='ok'&&window.lkTrack)window.lkTrack('compra',{currency:'ARS'});if(PG[2]){try{localStorage.removeItem(KEY)}catch(e){}cart.plan=null;cart.sup=false;render()}
       if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
       $('#modal-box').innerHTML=MODAL_X+(PG[2]?'<div class="modal-ic">'+ICK+'</div>':'')+'<h3 id="modal-t">'+PG[0]+'</h3><p>'+PG[1]+'</p>'+(PG[2]?'<a class="btn btn-main" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>':'');
       $('#modal').hidden=false;document.body.style.overflow='hidden';
@@ -864,5 +884,6 @@ body.checkout .sec-head{margin-bottom:26px}
   } else els.forEach(function(e){e.classList.add('in')});
 })();
 </script>
+<script src="sitio.js" defer></script>
 </body>
 </html>

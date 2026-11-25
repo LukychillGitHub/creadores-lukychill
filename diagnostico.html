@@ -212,7 +212,7 @@ footer a:hover{color:var(--ink)}
           <button class="btn btn-main" type="submit" id="next">Siguiente <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </form>
-      <p class="priv" id="priv">Tus datos solo se usan para mandarte el diagnóstico.</p>
+      <p class="priv" id="priv">Tus datos solo se usan para mandarte el diagnóstico. <a href="privacidad.html" style="color:inherit">Privacidad</a></p>
     </div>
   </div>
 </main>
@@ -220,7 +220,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <span>© 2026 Lukychill · Automatizaciones para creadores</span>
-    <span><a href="./">Inicio</a> · <a href="./#planes">Planes</a></span>
+    <span><a href="./">Inicio</a> · <a href="./#planes">Planes</a> · <a href="terminos.html">Términos</a> · <a href="privacidad.html">Privacidad</a></span>
   </div>
 </footer>
 
@@ -292,6 +292,7 @@ footer a:hover{color:var(--ink)}
     fetch(GF,{method:'POST',mode:'no-cors',body:p}).then(function(){
       var nm=$('nombre').value.trim().split(' ')[0];
       if(nm)document.querySelector('.done h2').textContent='¡Gracias, '+nm+'!';
+      if(window.lkTrack)window.lkTrack('diagnostico');
       go(TOTAL+1);
     }).catch(function(){
       b.disabled=false;b.textContent='Enviar diagnóstico';
@@ -301,5 +302,6 @@ footer a:hover{color:var(--ink)}
   go(1);
 })();
 </script>
+<script src="sitio.js" defer></script>
 </body>
 </html>
