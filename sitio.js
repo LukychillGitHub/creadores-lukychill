@@ -4,7 +4,7 @@
 (function(){
   'use strict';
   var GA_ID = 'G-0G12FMTX84';
-  var META_PIXEL = ''; // ej. '123456789012345'
+  var META_PIXEL = '1249866514223902';
 
   var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSdwqnwxtazSo2gX3Osrmec153HugQfeaCkZHfUoXNYrTL3XHQ/formResponse';
   var E = {motivo:1648442326, nombre:1215366356, mail:1371425894, mensaje:38499804};
