@@ -1027,9 +1027,41 @@ body.checkout .sec-head{margin-bottom:26px}
       })
       .catch(function(){m.innerHTML=MODAL_DEFAULT;var s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>'+(sup?'<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>':'');$('#modal-sum')&&($('#modal-sum').innerHTML=s)});
   }
+  // Cobro en dólares con PayPal (botones oficiales: cuenta PayPal o tarjeta sin cuenta). Servidor: función paypal en Supabase.
+  var PP_API='https://tordvdesfpgahqhyvrxh.supabase.co/functions/v1/paypal';
+  var PP_CLIENT='BAAk-I71iPAhmf9pzDyJctorVUX4kFwh9zUrQQFHC6beXIShL6WyxqiXQwFVjZXtUHKAGQHvW1U7EgHpLQ';
+  var FORM_URL='https://docs.google.com/forms/d/1cM3h-hj62wcM3gIeiQbtK34uR_nFLid1Lxo52jxhraw/viewform';
+  var ppLoad=null;
+  function loadPP(){
+    if(ppLoad)return ppLoad;
+    ppLoad=new Promise(function(ok,ko){var sc=document.createElement('script');sc.src='https://www.paypal.com/sdk/js?client-id='+PP_CLIENT+'&currency=USD&intent=capture&components=buttons&enable-funding=card&locale=es_AR';sc.onload=ok;sc.onerror=function(){ppLoad=null;ko()};document.head.appendChild(sc)});
+    return ppLoad;
+  }
+  function ppCall(body){return fetch(PP_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.ok?r.json():Promise.reject(r.status)})}
+  function checkoutPP(){
+    var p=PLANS[cart.plan],m=$('#modal-box'),sup=cart.sup,plan=cart.plan;
+    var rows='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>'+(sup?'<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>':''),sum='<div class="modal-sum">'+rows+'</div>';
+    m.innerHTML=MODAL_X+'<h3 id="modal-t">Pagá con PayPal o tarjeta</h3><p>Pago seguro procesado por PayPal. No hace falta tener cuenta: también podés pagar con tarjeta de débito o crédito.</p>'+sum+
+      (sup?'<p style="font-size:.85em;opacity:.8">Ahora pagás el armado. El soporte mensual lo activamos juntos cuando arranquemos.</p>':'')+'<div id="pp-btns" style="margin-top:14px;min-height:50px">Cargando…</div>';
+    closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
+    loadPP().then(function(){
+      $('#pp-btns').innerHTML='';
+      window.paypal.Buttons({
+        style:{layout:'vertical',shape:'pill',label:'pay'},
+        createOrder:function(){return ppCall({action:'create',plan:plan}).then(function(d){return d.id})},
+        onApprove:function(data){return ppCall({action:'capture',id:data.orderID}).then(function(d){
+          if(d.status!=='COMPLETED')throw 0;
+          m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">¡Pago recibido!</h3><p>Gracias. Para arrancar, completá el diagnóstico así conozco tu canal y armamos todo a tu medida.</p>'+sum+'<a class="btn btn-main" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>';
+          try{localStorage.removeItem(KEY)}catch(e){}
+        })},
+        onError:function(){$('#pp-btns').innerHTML='<p>No se pudo completar el pago. Probá de nuevo o escribime por el formulario.</p>'}
+      }).render('#pp-btns');
+    }).catch(function(){m.innerHTML=MODAL_DEFAULT;$('#modal-sum')&&($('#modal-sum').innerHTML=rows)});
+  }
   function checkout(cur){
     if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
     if(cur==='ars'&&MP_API){checkoutMP();return}
+    if(cur==='usd'&&PP_API){checkoutPP();return}
     var L=PAYMENT_LINKS[cur]||{},p=PLANS[cart.plan],s='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>';
     if(cart.sup)s+='<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>';
     var url=cur==='ars'?L[cart.plan]:L[cart.plan+(cart.sup?'+soporte':'')];
