@@ -3,7 +3,7 @@
    2) Medición de visitas (Google Analytics y píxel de Meta): se activan solas al completar los IDs. */
 (function(){
   'use strict';
-  var GA_ID = '';      // ej. 'G-XXXXXXXXXX'
+  var GA_ID = 'G-0G12FMTX84';
   var META_PIXEL = ''; // ej. '123456789012345'
 
   var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSdwqnwxtazSo2gX3Osrmec153HugQfeaCkZHfUoXNYrTL3XHQ/formResponse';
