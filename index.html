@@ -1042,7 +1042,7 @@ body.checkout .sec-head{margin-bottom:26px}
     var p=PLANS[cart.plan],m=$('#modal-box'),sup=cart.sup,plan=cart.plan;
     var rows='<div><span>Plan '+p.name+'</span><b>'+usd(p.price)+'</b></div>'+(sup?'<div><span>'+SUP.name+'</span><b>'+usd(SUP.price)+'/mes</b></div>':''),sum='<div class="modal-sum">'+rows+'</div>';
     m.innerHTML=MODAL_X+'<h3 id="modal-t">Pagá con PayPal o tarjeta</h3><p>Pago seguro procesado por PayPal. No hace falta tener cuenta: también podés pagar con tarjeta de débito o crédito.</p>'+sum+
-      (sup?'<p style="font-size:.85em;opacity:.8">Ahora pagás el armado. El soporte mensual lo activamos juntos cuando arranquemos.</p>':'')+'<div id="pp-btns" style="margin-top:14px;min-height:50px">Cargando…</div>';
+      (sup?'<p style="font-size:.85em;opacity:.8">Son 2 pasos: primero pagás el armado acá y después activás el soporte mensual, que PayPal cobra solo todos los meses.</p>':'')+'<div id="pp-btns" style="margin-top:14px;min-height:50px">Cargando…</div>';
     closeCart();$('#modal').hidden=false;document.body.style.overflow='hidden';
     loadPP().then(function(){
       $('#pp-btns').innerHTML='';
@@ -1051,8 +1051,13 @@ body.checkout .sec-head{margin-bottom:26px}
         createOrder:function(){return ppCall({action:'create',plan:plan}).then(function(d){return d.id})},
         onApprove:function(data){return ppCall({action:'capture',id:data.orderID}).then(function(d){
           if(d.status!=='COMPLETED')throw 0;
-          m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">¡Pago recibido!</h3><p>Gracias. Para arrancar, completá el diagnóstico así conozco tu canal y armamos todo a tu medida.</p>'+sum+'<a class="btn btn-main" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>';
           try{localStorage.removeItem(KEY)}catch(e){}
+          if(sup){
+            m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">¡Armado pagado! Falta 1 paso</h3><p>Ahora activá el soporte mensual. PayPal lo cobra solo cada mes y lo podés cancelar cuando quieras desde tu cuenta.</p>'+sum+'<button class="btn btn-main" type="button" id="pp-sub">2. Activar el soporte ('+usd(SUP.price)+'/mes)</button><a class="btn btn-ghost" style="margin-top:10px" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>';
+            $('#pp-sub').addEventListener('click',function(){var b=this;b.disabled=true;b.textContent='Abriendo PayPal…';ppCall({action:'subscribe'}).then(function(d){if(!d.url)throw 0;window.location.href=d.url}).catch(function(){b.disabled=false;b.textContent='No se pudo abrir. Probá de nuevo'})});
+            return;
+          }
+          m.innerHTML=MODAL_X+'<div class="modal-ic">'+ICK+'</div><h3 id="modal-t">¡Pago recibido!</h3><p>Gracias. Para arrancar, completá el diagnóstico así conozco tu canal y armamos todo a tu medida.</p>'+sum+'<a class="btn btn-main" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>';
         })},
         onError:function(){$('#pp-btns').innerHTML='<p>No se pudo completar el pago. Probá de nuevo o escribime por el formulario.</p>'}
       }).render('#pp-btns');
@@ -1095,6 +1100,19 @@ body.checkout .sec-head{margin-bottom:26px}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();$('#modal').hidden=true;document.body.style.overflow=''}});
   if(CO){try{var qp=new URLSearchParams(location.search).get('plan');if(qp in PLANS)cart.plan=qp}catch(e){}}
   render();
+  /* Vuelta desde Mercado Pago o PayPal (?pago=ok|pendiente|error|soporte|cancelado) */
+  try{var pg=new URLSearchParams(location.search).get('pago'),PG={
+    ok:['¡Pago recibido!','Gracias. Para arrancar, completá el diagnóstico así conozco tu canal y armamos todo a tu medida.',1],
+    soporte:['¡Soporte mensual activado!','Listo, el soporte queda activo y se cobra solo cada mes. Si todavía no lo hiciste, completá el diagnóstico.',1],
+    pendiente:['Tu pago está en proceso','Apenas se acredite te escribo. Mientras tanto podés completar el diagnóstico.',1],
+    error:['El pago no se completó','No se cobró nada. Podés intentarlo de nuevo cuando quieras.',0],
+    cancelado:['No se activó el soporte','No se cobró nada. Podés activarlo más adelante o escribirme por el formulario.',0]}[pg];
+    if(PG){if(PG[2]){try{localStorage.removeItem(KEY)}catch(e){}cart.plan=null;cart.sup=false;render()}
+      if(MODAL_DEFAULT===null)MODAL_DEFAULT=$('#modal-box').innerHTML;
+      $('#modal-box').innerHTML=MODAL_X+(PG[2]?'<div class="modal-ic">'+ICK+'</div>':'')+'<h3 id="modal-t">'+PG[0]+'</h3><p>'+PG[1]+'</p>'+(PG[2]?'<a class="btn btn-main" href="'+FORM_URL+'" target="_blank" rel="noopener">Completar el diagnóstico</a>':'');
+      $('#modal').hidden=false;document.body.style.overflow='hidden';
+      try{history.replaceState(null,'',location.pathname)}catch(e){}}
+  }catch(e){}
   /* Barra fija en celular cuando todavía no hay plan elegido */
   var mcta=$('#mcta'),heroEl=$('.hero'),planesEl=$('#planes'),planesIn=false;
   if(mcta){
